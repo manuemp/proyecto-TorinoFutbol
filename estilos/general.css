@@ -1,0 +1,158 @@
+
+/* body, html, .nav1, .nav2
+{
+    max-width: 1700px;
+} */
+
+body, html
+{
+    background: linear-gradient(45deg, lavender, transparent);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12px;
+    margin: auto;
+}
+
+.nav1
+{
+    justify-content: space-between;
+    background:linear-gradient(45deg, #3e139c, #6b27fc 80%);
+    width: 100vw;
+    height: 55px;
+    display: flex;
+    align-items: center;
+}
+
+.nav2
+{
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #481f9e, #8650fe 80%);
+    height: 80px;
+    display: flex;
+    width: 100vw;
+}
+
+.opcion
+{
+    cursor: pointer;
+    color: white;
+    /* Cambiar por rem? */
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px;
+    margin-right: 15px;
+    border-radius: 10px;
+}
+
+.logo
+{
+    width: 120px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.opcion:hover
+{
+    background: linear-gradient(90deg, #5628bc, transparent 92%);
+}
+
+.info_container
+{
+    width: 100%;
+    /* height: 300px; */
+    height: auto;
+    box-sizing: border-box;
+    padding: 45px 25px;
+    /* margin-top: 20px; */
+    color: #8650fe;
+    transition: 2s;
+    cursor: pointer;
+}
+
+.info_titulo
+{
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.info_texto
+{
+    font-size: 2.3rem;
+    color:#3e139c;
+}
+
+.footer
+{
+    width: 100%;
+    height: 20vh;
+    background-color: #00053d;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#logo_footer
+{
+    display: block;
+    margin:auto;
+    width: 150px;
+    filter: opacity(0.5)
+}
+
+label
+{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form_opcion
+{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
+.form_input
+{
+    width: 200px;
+    height: 30px;
+    background-color: #00053d;
+    border: 2px solid white;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    display: block;
+}
+
+
+
+@media (max-width: 1100px)
+{
+    .item_texto
+    {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+@media (max-width: 650px)
+{
+    .info_titulo
+    {
+        font-size: 3rem;
+    }
+
+    .info_texto
+    {
+        font-size: 1.8rem;
+    }
+
+    .opcion
+    {
+        font-size: 1.4rem;
+    }
+}
