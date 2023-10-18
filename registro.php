@@ -30,7 +30,8 @@
 
         .registro_container
         {
-            height: 100vh;
+            min-height: 100vh;
+            height: 100%;
             width: 55%;
             color: white;
             background: radial-gradient(#6b27fc, #270c63);
@@ -39,7 +40,7 @@
             font-size: 1.3rem;
             display: flex;
             align-items: center;
-            overflow: scroll;
+            /* overflow: scroll; */
         }
 
         #table_registro
@@ -159,6 +160,11 @@
             {
                 width: 70%;
             }
+
+            #titulo_registro {
+                font-size: 2rem;
+                margin-top: 50px;
+            }
         }
 
     </style>
@@ -202,7 +208,9 @@
 
 
     <main>
-        <a href="./index.php"><img src="./imgs/torinoLogoBlanco_2.png" class="logo" alt="logoTorino"></a>
+        <div style="display: block;">
+            <a href="./index.php"><img src="./imgs/torinoLogoBlanco_2.png" class="logo" alt="logoTorino"></a>
+        </div>
         <div class="registro_container">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div>

@@ -1,6 +1,5 @@
-<?php 
-
-    session_start();
+<?php session_start(); ?>
+<?php
 
     if(intval($_SESSION["Administrador"]) != 1)
     {
@@ -19,7 +18,6 @@
         $dia_inicio = 1;
         $dia_limite = 8;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +28,14 @@
     <script src="./jquery.js"></script>
     <title>TorinoFútbol: Admin - Reservas</title>
     <style>
-        body, html
-        {
+        body, html{
             height: 100%;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            /* padding-right: 5px;
+            box-sizing: border-box; */
         }
 
-        .nav_admin
-        {
+        .nav_admin{
             height: 55px;
             width: 100%;
             display: flex;
@@ -46,8 +44,7 @@
             border-bottom: 2px solid #8650fe;
         }
 
-        main
-        {
+        main{
             display: flex;
             justify-content: center;
             align-content: center;
@@ -55,15 +52,13 @@
             height: 60vh;
         }
 
-        .logo
-        {
+        .logo{
             width: 120px;
             margin-left: 10px;
             cursor: pointer;
         }
 
-        .opcion
-        {
+        .opcion{
             cursor: pointer;
             color: #8650fe;
             font-size: 20px;
@@ -73,21 +68,18 @@
             border-radius: 10px;
         }
 
-        a
-        {
+        a{
             text-decoration: none;
         }
 
-        #admin_links
-        {
+        #admin_links{
             display: flex;
             align-items: center;
             justify-content: center;
             width: 500px;
         }
 
-        .admin_btn
-        {
+        .admin_btn{
             background-color: white;
             width: 130px;
             border-radius: 0;
@@ -97,53 +89,43 @@
             transition: 1s;
         }
 
-        .admin_btn:hover
-        {
+        .admin_btn:hover{
             background-color: #d0bbff;
         }
 
-        h1
-        {
+        h1{
             color:#8650fe;
             font-size: 2.5rem;
         }
 
-        .item_historial
-        {
-            width: 100%;
+        .item_historial{
+            width: 98%;
             height: 60px;
             background-color: whitesmoke;
             color: #8650fe;
             display: flex;
-            justify-content: space-around;
+            justify-content: start;
             border-radius: 10px;
             margin-bottom: 5px;
-            /* transition: 1s; */
             cursor: pointer;
+            padding-left: 10px;
         }
 
-        .item_historial:hover
-        {
+        .item_historial:hover{
             background-color: #702eff;
             color: white;
         }
 
-        table
-        {
+        table{
             width: 100%;
-            /* height: 100%; */
         }
 
-        thead, th
-        {
+        thead, th{
             position: sticky;
             top: 0;
-            /* font-size: 1.5rem; */
         }
 
-        .td_historial
-        {
-            /* width: 10%; */
+        .td_historial{
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -151,23 +133,20 @@
             font-size: 1rem;
         }
 
-        #th_historial
-        {
+        #th_historial{
             background-color: #333;
             color: white;
             border-radius: 20px 20px 0 0;
         }
 
-        #filtros_historial
-        {
+        #filtros_historial{
             margin-top: 8px;
             color: white;
             height: 70px;
             background: linear-gradient(45deg, #481f9e, #8650fe 80%);
         }
 
-        #container_filtro
-        {
+        #container_filtro{
             width: 100%;
             display: flex;
             justify-content: flex-start;
@@ -176,8 +155,7 @@
             padding-right: 20px;
         }
 
-        select, input
-        {
+        select, input{
             width: 180px;
             height: 35px;
             border: none;
@@ -198,7 +176,7 @@
         }
 
         .cancha, .dia, .hora, .boton{
-            width: 10%;
+            width: 15%;
             justify-content: center;
         }
 
@@ -206,24 +184,12 @@
             text-align: right;
         }
 
-        .btn_aplicar_falta{
-            position: relative;
-            top: -6px;
-            width: 300px;
-            height: 42px;
-            background-color: red;
-            border-radius: 0px 0px 10px 10px;
-            font-family: inherit;
-            color: white;
-            transition: 1s;
-            border: none;
-            cursor: pointer;
-        }
-
         .btn_baja{
             width: 60px;
             height: 60px;
-            margin: -1px -12% 0px 0px;
+            position: absolute;
+            /* right: 10px; */
+            right: 2%;
             border-radius: 0px 10px 10px 0px;
             background-color: red;
             font-family: inherit;
@@ -231,11 +197,7 @@
             transition: 1s;
             border: none;
             cursor: pointer;
-        }
-
-        .btn_baja:hover
-        {
-            width: 100px;
+            margin-top: -1px;
         }
 
         #tr_btn_usuario_1{
@@ -246,51 +208,118 @@
             height: 20px;
             filter: invert(1);
         }
+
+        @media(max-width: 950px){
+            .td_historial{
+                font-size: 0.8rem;
+            }
+
+            #container_filtro{
+                justify-content: center;
+            }
+        }
+
+        @media(max-width: 750px){
+            #filtros_historial{
+                height: 35px;
+                border-radius: 0px;
+            }
+
+            select, input{
+                width: 120px;
+                font-size: 0.65rem;
+                border: 2px solid #7643e5;
+                border-radius: 0px;
+                box-sizing: border-box;
+            }
+
+            .nombre, .apellido{
+                display: none;
+            }
+
+            .cancha, .dia, .hora{
+                width: 20%;
+            }
+        }
+
+        @media(max-width: 450px){
+            .cancha{
+                display: none;
+            }
+
+            .email{
+                width: 55%;
+            }
+
+            select, input{
+                width: 115px;
+            }
+
+            .td_historial{
+                font-size: 0.55rem;
+            }
+
+            #filtro_email{
+                display: none;
+            }
+
+            .btn_baja{
+                width: 34px;
+            }
+        }
+
+        @media(min-width: 451px){
+            .btn_baja:hover{
+                width: 100px;
+            }
+        }
+
+
     </style>
 </head>
 <body>
     <?php include("./nav_admin.php") ?>
     <h1>Reservas</h1>
     <article id="filtros_historial" class="item_historial">
-                    <form id="container_filtro" method="post" enctype="multipart/form-data">
-                        <select name="filtro_cancha" id="filtro_cancha">
-                            <option value="" selected>Todas las Canchas</option>
-                            <option value="1">F5 (A)</option>
-                            <option value="2">F5 (B)</option>
-                            <option value="3">F7 (A)</option>
-                            <option value="4">F7 (B)</option>
-                            <option value="5">F8 (A)</option>
-                            <option value="6">F8 (B)</option>
-                        </select>
-                        <select name="filtro_dia" id="filtro_dia">
-                            <option value="" selected>Cualquier Día</option>
-                            <?php 
-                                for($i = $dia_inicio ; $i < $dia_limite ; $i++)
-                                {
-                                    echo "<option value='" .  date('Y-m-d', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "'>" . date('d/m/y', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "</option>";
-                                }
-                            ?>
-                        </select>
-                        <input type="text" placeholder="Filtrar por email" id="filtro_email">
-                    </form>
-                    
-                </article>
-                <table id="tabla">
-                    <thead>
-                        <tr id="th_historial" class="item_historial">
-                            <th class="nombre td_historial">Nombre</th>
-                            <th class="apellido td_historial">Apellido</th>
-                            <th class="email td_historial">Email</th>
-                            <th class="dia td_historial">Día</th>
-                            <th class="cancha td_historial">Cancha</th>
-                            <th class="hora td_historial">Hora</th>
-                            <th class="hora td_historial"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="body_tabla">
-                    </tbody>
-                </table>
-            </article>
+        <form id="container_filtro" method="post" enctype="multipart/form-data">
+            <select name="filtro_cancha" id="filtro_cancha">
+                <option value="" selected>Todas las Canchas</option>
+                <option value="1">F5 (A)</option>
+                <option value="2">F5 (B)</option>
+                <option value="3">F7 (A)</option>
+                <option value="4">F7 (B)</option>
+                <option value="5">F8 (A)</option>
+                <option value="6">F8 (B)</option>
+            </select>
+            <select name="filtro_dia" id="filtro_dia">
+                <option value="" selected>Cualquier Día</option>
+                <?php 
+                    for($i = $dia_inicio ; $i < $dia_limite ; $i++)
+                    {
+                        echo "<option value='" .  date('Y-m-d', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "'>" . date('d/m/y', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "</option>";
+                    }
+                ?>
+            </select>
+            <input type="text" placeholder="Filtrar por email" id="filtro_email">
+        </form>
+    </article>
+
+    <table id="tabla">
+        <thead>
+            <tr id="th_historial" class="item_historial">
+                <th class="nombre td_historial">Nombre</th>
+                <th class="apellido td_historial">Apellido</th>
+                <th class="email td_historial">Email</th>
+                <th class="cancha td_historial">Cancha</th>
+                <th class="dia td_historial">Día</th>
+                <th class="hora td_historial">Hora</th>
+                <th class="hora td_historial"></th>
+            </tr>
+        </thead>
+        <tbody id="body_tabla">
+        </tbody>
+    </table>
+
 </body>
 </html>
 <script>    
@@ -373,7 +402,8 @@
             // boton.innerHTML = "Baja"
 
             boton.addEventListener('click', ()=>{
-                baja_reserva(elemento["id"], elemento["email"]);
+                baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
+                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
             })
 
             boton.appendChild(tacho);
@@ -393,8 +423,12 @@
         });
     }
 
-    function baja_reserva(id, email_user){
-        let confirmar = confirm(`¿Desea dar de baja a la reserva?`);
+    function baja_reserva(id, email_user, nombre, apellido, hora, cancha, dia){
+        let confirmar = confirm(`¿Desea dar de baja la reserva?\n
+                        Nombre: ${nombre} ${apellido}\n
+                        Email: ${email_user}\n
+                        Dia: ${dia}, ${hora}hs\n
+                        Cancha: ${cancha}`);
         if(confirmar){
             $.ajax({
                 url: './baja_reserva.php',

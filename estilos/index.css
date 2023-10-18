@@ -164,7 +164,6 @@ footer
 #nav1_responsive
 {
     display:none;
-
 }
 
 #boton_desplegable
@@ -179,6 +178,7 @@ footer
     position: absolute;
     background-color: #00053d;
     opacity: 0.9;
+    z-index: 3;
 }
 
 .opcion_desplegable
@@ -215,12 +215,6 @@ footer
 
 @media (max-width: 920px)
 {
-
-    .navbar_desplegable
-    {
-        display: none;
-    }
-
     .niveles_container
     {
         flex-direction: column;
@@ -276,5 +270,12 @@ footer
     .opcion
     {
         font-size: 1.4rem;
+    }
+}
+
+@media(min-width: 651px){
+    .opcion_desplegable
+    {
+        display:none;
     }
 }

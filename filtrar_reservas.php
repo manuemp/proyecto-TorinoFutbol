@@ -1,5 +1,5 @@
+<?php session_start(); ?>
 <?php 
-    session_start();
     if(!isset($_POST["filtro_cancha"]))
     {
         header("Location:index.php");

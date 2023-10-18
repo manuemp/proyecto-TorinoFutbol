@@ -8,44 +8,81 @@
     <link rel="stylesheet" href="./estilos/modal.css">
     <title>Torino Fútbol: Reservá las mejores canchas</title>
     <style>
-
-    #sintetico
-    {
-        width: 100%;
-        height: 300px;
-        background-image: url("./imgs/sinteticoHD.jpeg");
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .bienvenido
-    {
-        font-size: 5rem;
-        color: yellow;
-        font-weight: bold;
-        width: 100%;
-        padding: 70px 40px 70px 30px;
-        margin: auto;
-        background-image: url("./imgs/jugador_pelota4.jpeg");
-        background-repeat: no-repeat;
-        background-size:cover;
-        box-sizing: border-box;
-        border-bottom: 6px solid crimson;
-        cursor:default;
-    }
-
-
-    @media (max-width: 650px)
-    {
-        .bienvenido
+        @media(max-width: 920px)
         {
-            font-size: 2.5rem;
-            background-image: url("./imgs/jugador_pelota7.png");
+            #texto_niveles
+            {
+                font-size: 2rem;
+            }
         }
-    }
 
+        @media(max-width: 650px)
+        {
+            .bienvenido
+            {
+                font-size: 2.5rem;
+                background-image: url("./imgs/jugador_pelota7.png");
+            }
 
+            .item_nivel{
+                height: 200px;
+            }
 
+            .item_texto{
+                font-size: 1.2rem;
+            }
+
+            #container_reservas{
+                height: auto;
+            }
+
+            .texto_info{
+                font-size: 2.7rem;
+            }
+
+            .titulo_info{
+                font-size: 3.4rem;
+            }
+
+            #texto_niveles{
+                font-size: 1.2rem;
+            }
+
+            #titulo_reservas{
+                font-size: 2.4rem;
+                text-align: center;
+            }
+
+            .reserva{
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+            .info_titulo{
+                font-size: 2.2rem;
+            }
+
+            .info_texto{
+                font-size: 1.5rem;
+            }
+        }
+
+        @media(max-width: 425px){
+            #texto_niveles{
+                font-size: 1rem;
+            }
+        }
+
+        @media(max-width: 360px){
+
+            #titulo_reservas{
+                font-size: 2rem;
+            }
+
+            .reserva{
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -163,31 +200,40 @@
     <?php include("./footer.php") ?>
 </body>
 </html>
+<?php include("./nav_desplegable.php") ?>
 <script>
+
+    var iniciar_sesion_desplegable = document.getElementById("iniciar_sesion_desplegable");
     var iniciar_sesion = document.getElementById("iniciar_sesion");
     var modal = document.getElementById("modal_inicio_sesion");
     var modal_fail = document.getElementById("modal_inicio_sesion_fail");
     var cerrar_modal = document.querySelectorAll(".modal_cerrar");
     var modal_background = document.getElementById("modal_background");
-    var navbar_desplegable = document.querySelector(".navbar_desplegable");
-    var flag = false;
+    // var navbar_desplegable = document.querySelector(".navbar_desplegable");
+    // var flag = false;
 
     window.onbeforeunload = history.pushState(null, null, "index.php");
 
-    document.getElementById("boton_desplegable").addEventListener('click', ()=>{
-        flag = !flag;
-        if(flag)
-        {
-            navbar_desplegable.style.display = "block";
-        }
-        else
-        {
-            navbar_desplegable.style.display = "none";
-        }
-    });
+    // document.getElementById("boton_desplegable").addEventListener('click', ()=>{
+    //     flag = !flag;
+    //     if(flag)
+    //     {
+    //         navbar_desplegable.style.display = "block";
+    //     }
+    //     else
+    //     {
+    //         navbar_desplegable.style.display = "none";
+    //     }
+    // });
 
     
     iniciar_sesion.addEventListener('click', ()=>
+    {
+        modal_background.style.display = "block";
+        modal.style.display = "block";
+    });
+
+    iniciar_sesion_desplegable.addEventListener('click', ()=>
     {
         modal_background.style.display = "block";
         modal.style.display = "block";

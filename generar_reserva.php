@@ -1,7 +1,5 @@
+<?php session_start(); ?>
 <?php
-    
-    session_start();
-
     if(!(isset($_SESSION["Nombre"]) && isset($_POST["select_dia"]) && isset($_POST["select_cancha"]) && isset($_POST["select_hora"])))
     {
         header("Location:index.php");

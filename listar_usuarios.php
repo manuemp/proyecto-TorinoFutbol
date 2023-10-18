@@ -1,7 +1,5 @@
 <?php 
     include("./conexion.php");
-
-
     // $resultado = mysqli_query($conexion, "SELECT ID, Nombre, Apellido, Email, Reservas, Faltas, Nivel FROM Usuarios ORDER BY Nombre");
     
     $email = $_POST["email"];

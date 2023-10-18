@@ -1,7 +1,5 @@
-
+<?php session_start(); ?>
 <?php 
-    session_start(); 
-
     if(isset($_SESSION["Administrador"]))
     {
         if(intval($_SESSION["Administrador"]) == 1)
@@ -44,19 +42,6 @@
         border-bottom: 6px solid crimson;
         cursor:default;
     }
-
-
-    @media (max-width: 650px)
-    {
-        .bienvenido
-        {
-            font-size: 2.5rem;
-            background-image: url("./imgs/jugador_pelota7.png");
-        }
-    }
-
-
-
     </style>
 </head>
 <body>

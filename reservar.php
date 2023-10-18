@@ -1,6 +1,5 @@
+<?php session_start(); ?>
 <?php 
-    session_start();
-
     include("./conexion.php");
     $email = $_SESSION["Email"];
 
@@ -43,8 +42,9 @@
             width: 100%;
             height: 100%;
             background-color: white;
-            padding: 60px;
+            padding: 40px;
             box-sizing: border-box;
+            overflow: scroll;
         }
 
         .titulo_reserva
@@ -76,7 +76,7 @@
         {
             width: 100%;
             min-height: 100vh;
-            /* background-image: url("./proyecto/imgs/hinchadav.png"); */
+            height: 100%;
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -89,16 +89,50 @@
         }
 
         main{
-            height: 67vh;
+            height: 62vh;
         }
 
         form{
             height: 100%;
         }
 
+        @media (max-width: 900px){
+            .select_reserva{
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            .titulo_reserva{
+                font-size: 2.8rem;
+            }
+        }
+
         @media(max-width: 650px){
             main{
                 height: 75vh;
+            }
+
+            .select_reserva{
+                width: 90%;
+            }
+
+            #reservar{
+                width: 40%;
+            }
+        }
+
+        @media(max-width: 380px){
+            .select_reserva{
+                width: 100%;
+                font-size: 1.2rem;
+            }
+
+            #reservar{
+                width: 60%;
+            }
+
+            .titulo_reserva{
+                margin-top: 30px;
+                font-size: 2.2rem;
             }
         }
 
@@ -143,6 +177,8 @@
 </body>
 </html>
 
+<?php include("./nav_desplegable.php") ?>
+
 <script>
 
     let select_hora = document.getElementById("select_hora");
@@ -152,7 +188,6 @@
     let dia;
     let cancha;
     const date = new Date();
-    // let hoy = date.toISOString().split('T')[0];
     hoy = date.toLocaleDateString('en-CA');
     let horarios = ["10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00",
                     "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00"];

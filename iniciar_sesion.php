@@ -2,7 +2,6 @@
     $email = $_POST['email'];
     $pass = sha1($_POST['pass']);
 
-
     include("./conexion.php");
 
     $consulta = mysqli_query($conexion, "SELECT Nombre, Apellido, Email, Faltas, Racha, Administrador 

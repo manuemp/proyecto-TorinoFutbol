@@ -1,6 +1,5 @@
+<?php session_start(); ?>
 <?php 
-    session_start(); 
-
     if(intval($_SESSION["Administrador"]) != 1)
         header("Location:index.php");
 ?>
@@ -248,6 +247,20 @@
 
         #td_btn_falta{
             text-align: right;
+        }
+
+        @media(max-width: 650px){
+            #tabla, #filtro_faltas{
+                width: 100%;
+            }
+
+            .td_historial{
+                font-size: 0.7rem;
+            }
+
+            #titulo_faltas{
+                font-size: 2rem;
+            }
         }
 
 

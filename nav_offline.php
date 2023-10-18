@@ -6,11 +6,6 @@
             <a class="opcion" href="registro.php">Registrate</a>
         </div>
     </div>
-
-    <!-- <div class="nav2" id="nav2_normal">
-        <div class="opcion">Canchas</div>
-        <a class="opcion" href="reservar.php">Reservá</a>
-    </div> -->
 </nav>
 
 <div class="nav1" id="nav1_responsive">
@@ -19,8 +14,6 @@
 </div>
 
 <div class="navbar_desplegable">
-    <!-- <a class="opcion_desplegable" href="#">Canchas</a>
-    <a class="opcion_desplegable" href="reservar.php">Reservá</a> -->
-    <a class="opcion_desplegable" href="#">Iniciar Sesión</a>
+    <a class="opcion_desplegable" id="iniciar_sesion_desplegable">Iniciar Sesión</a>
     <a class="opcion_desplegable" href="registro.php">Registrate</a>
 </div>

@@ -110,6 +110,32 @@
             font-size: 3.2rem;
         }
 
+        #beneficios{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2rem;
+            margin-top: 25px;
+            margin-bottom: -14px;
+            transition: 1s;
+            cursor: pointer;
+        }
+
+        .beneficios_inactivo{
+            color: #7a7aff;
+            background-color: #c9c9ff;
+        }
+
+        .beneficios_activo{
+            background-color: #5f22e3;
+            color: white;
+            /* box-shadow: -2px 12px 11px -3px #a97dd2; */
+        }
+
+
         @media(max-width: 920px)
         {
             #texto_niveles
@@ -118,22 +144,67 @@
             }
         }
 
-        @media(max-width: 600px)
+        @media(max-width: 650px)
         {
+            #beneficios{
+                height: 70px;
+            }
 
-            .texto_info
+            .bienvenido
             {
+                font-size: 2.5rem;
+                background-image: url("./imgs/jugador_pelota7.png");
+            }
+
+            .item_nivel{
+                height: 200px;
+            }
+
+            .item_texto{
+                font-size: 1.2rem;
+            }
+
+            #container_reservas{
+                height: auto;
+            }
+
+            .texto_info{
                 font-size: 2.7rem;
             }
 
-            .titulo_info
-            {
+            .titulo_info{
                 font-size: 3.4rem;
             }
 
-            #texto_niveles
-            {
-                font-size: 1.4rem;
+            #texto_niveles{
+                font-size: 1.2rem;
+            }
+
+            #titulo_reservas{
+                font-size: 2.4rem;
+                text-align: center;
+            }
+
+            .reserva{
+                font-size: 1.2rem;
+                text-align: center;
+            }
+        }
+
+        @media(max-width: 425px){
+            #texto_niveles{
+                font-size: 1rem;
+            }
+        }
+
+        @media(max-width: 360px){
+
+            #titulo_reservas{
+                font-size: 2rem;
+            }
+
+            .reserva{
+                font-size: 1rem;
             }
         }
     </style>
@@ -156,7 +227,9 @@
             </div>
         </section>
 
-        <section class="info_container">
+        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios 🔻</div>
+
+        <section class="info_container" id="beneficios_container" style="display: none;">
             <div class="niveles_container">
                 <div class="item_nivel" id="recreativo">
                     <div class="item_titulo">Recreativo</div><br>
@@ -230,19 +303,39 @@
     <?php include("./footer.php") ?>
 </body>
 </html>
+<?php include("./nav_desplegable.php") ?>
 <script>
-    var navbar_desplegable = document.querySelector(".navbar_desplegable");
-    var flag = false;
+    // var navbar_desplegable = document.querySelector(".navbar_desplegable");
+    var div_beneficios = document.getElementById("beneficios");
+    var beneficios_container = document.getElementById("beneficios_container");
+    // var flag = false;
+    var flag_beneficios = false;
 
-    document.getElementById("boton_desplegable").addEventListener('click', ()=>{
-        flag = !flag;
-        if(flag)
+    div_beneficios.addEventListener('click', ()=>{
+        flag_beneficios = !flag_beneficios;
+        if(flag_beneficios)
         {
-            navbar_desplegable.style.display = "block";
+            beneficios_container.style.display = "flex";
+            div_beneficios.className = "beneficios_activo";
+            div_beneficios.innerHTML = "Ver Beneficios 🔺"
         }
         else
         {
-            navbar_desplegable.style.display = "none";
+            beneficios_container.style.display = "none";
+            div_beneficios.className = "beneficios_inactivo";
+            div_beneficios.innerHTML = "Ver Beneficios 🔻"
         }
-    });
+    })
+
+    // document.getElementById("boton_desplegable").addEventListener('click', ()=>{
+    //     flag = !flag;
+    //     if(flag)
+    //     {
+    //         navbar_desplegable.style.display = "block";
+    //     }
+    //     else
+    //     {
+    //         navbar_desplegable.style.display = "none";
+    //     }
+    // });
 </script>

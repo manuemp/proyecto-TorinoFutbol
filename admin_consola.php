@@ -1,6 +1,5 @@
-<?php 
-
-    session_start();
+<?php session_start(); ?>
+<?php
     
     if(intval($_SESSION["Administrador"]) != 1)
     {
@@ -91,6 +90,12 @@
         {
             color:#8650fe;
             font-size: 2.5rem;
+        }
+
+        @media(max-width: 400px){
+            .admin_btn{
+                width: 80px;
+            }
         }
         
     </style>

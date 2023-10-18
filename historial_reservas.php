@@ -1,5 +1,5 @@
+<?php session_start(); ?>
 <?php 
-    session_start();
     if(!isset($_SESSION["Nombre"]))
     {
         header("Location:index.php");
@@ -14,14 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./estilos/general.css">
     <link rel="stylesheet" href="./estilos/index.css">
-    <title>Document</title>
+    <title>TorinoFútbol: Tu Historial de Reservas</title>
     <style>
         main
         {
-            height: 80vh;
+            height: 100vh;
         }
 
-        .historial_cancha
+        .historial
         {
             border-top: 20px solid white;
             position: relative;
@@ -84,7 +84,7 @@
         {
             background-color: #333;
             color: white;
-            border-radius: 20px 20px 0 0;
+            border-radius: 10px 10px 0 0;
         }
 
         #filtros_historial
@@ -119,6 +119,48 @@
             font-size: 1.3rem;
         }
 
+        @media(max-width: 960px){
+            .td_historial{
+                font-size: 1.3rem;
+            }
+        }
+
+        @media(max-width: 650px){
+            .item_historial{
+                margin-bottom: 10px;
+            }
+
+            .historial{
+                padding: 0px 25px 25px 25px;
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 480px){
+
+            .historial{
+                width: 100%;
+            }
+
+            .td_historial{
+                font-size: 1rem;
+            }
+
+            select{
+                width: 100%;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .item_historial{
+                margin-bottom: 5px;
+            }
+
+            #filtros_historial{
+                height: 52px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -126,7 +168,7 @@
         <?php include("./nav_online.php") ?>
 
         <main>
-            <article class="historial_cancha">
+            <article class="historial">
                 <article id="filtros_historial" class="item_historial">
                     <form id="container_filtro" method="post" enctype="multipart/form-data">
                         <select name="filtro_cancha" id="filtro_cancha">
@@ -156,6 +198,8 @@
     </main>
 </body>
 </html>
+
+<?php include("./nav_desplegable.php") ?>
 
 <script>
 
@@ -199,8 +243,6 @@
                 }
             }
         });
-
-
     }
 
     function generar_tabla(data)

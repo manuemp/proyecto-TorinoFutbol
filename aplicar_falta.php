@@ -1,5 +1,4 @@
 <?php 
-
    $email = $_POST["email"];
 
    include("./conexion.php");
