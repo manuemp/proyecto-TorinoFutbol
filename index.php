@@ -3,7 +3,7 @@
     if(isset($_SESSION["Administrador"]))
     {
         if(intval($_SESSION["Administrador"]) == 1)
-            header("Location:admin_consola.php");
+            header("Location:admin_reservas.php");
     }
 ?>
 

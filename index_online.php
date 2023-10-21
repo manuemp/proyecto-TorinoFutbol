@@ -83,23 +83,34 @@
             overflow: scroll;
         }
 
-        .reserva
+        .reserva, .reserva_perdida
         {
             padding: 15px;
             border-radius: 10px;
             font-size: 1.8rem;
             box-sizing: border-box;
             font-weight: bold;
-            color: white;
-            background-color: #a177ff;
             margin-bottom: 8px;
-            cursor: pointer;
+            cursor: default;
             transition: 1s;
         }
 
-        .reserva:hover
-        {
+        .reserva{
+            color: white;
+            background-color: #a177ff;
+        }
+
+        .reserva_perdida{
+            color: white;
+            background-color: red;
+        }
+
+        .reserva:hover{
             background-color: #5f18ff;
+        }
+
+        .reserva_perdida:hover{
+            background-color: crimson;
         }
 
         #titulo_reservas
@@ -132,14 +143,20 @@
         .beneficios_activo{
             background-color: #5f22e3;
             color: white;
-            /* box-shadow: -2px 12px 11px -3px #a97dd2; */
         }
 
+        .icono_info{
+            height: 40px;
+        }
+
+        .btn_triangulo{
+            height: 15px;
+            margin-left: 10px;
+        }
 
         @media(max-width: 920px)
         {
-            #texto_niveles
-            {
+            #texto_niveles{
                 font-size: 2rem;
             }
         }
@@ -173,7 +190,7 @@
             }
 
             .titulo_info{
-                font-size: 3.4rem;
+                font-size: 3.2rem;
             }
 
             #texto_niveles{
@@ -185,7 +202,7 @@
                 text-align: center;
             }
 
-            .reserva{
+            .reserva, .reserva_perdida{
                 font-size: 1.2rem;
                 text-align: center;
             }
@@ -195,15 +212,26 @@
             #texto_niveles{
                 font-size: 1rem;
             }
+
+            .titulo_info{
+                font-size: 2.5rem;
+            }
+
+            .texto_info{
+                font-size: 2rem;
+            }
+
+            .icono_info{
+                height: 28px;
+            }
         }
 
         @media(max-width: 360px){
-
             #titulo_reservas{
                 font-size: 2rem;
             }
 
-            .reserva{
+            .reserva, .reserva_perdida{
                 font-size: 1rem;
             }
         }
@@ -213,11 +241,12 @@
     <main>
         
         <div class="info_container" id="info_usuario">
-            <div class="titulo_info" style="color:#e1ff00;"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></div>
-            <div class="texto_info" style="color: white;">🚩 Jugador <?php echo $level ?> 
-                                                      <br>🗓 Reservas: <?php echo $reservas ?>   
-                                                      <br>✅ Racha: <?php echo $_SESSION["Racha"] ?> 
-                                                      <br>❗️ Faltas: <?php echo $_SESSION["Faltas"]?></div>
+            <h1 class="titulo_info" style="color:#e1ff00; margin-bottom: 0;"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
+            <div class="texto_info" style="color: white; text-shadow: 3px 3px 0px darkviolet">
+                                                      <img src="./imgs/bandera.webp" alt="Icono Falta" class="icono_info"> Jugador <?php echo $level ?> 
+                                                      <br><img src="./imgs/calendario.png" alt="Icono Falta" class="icono_info"> Reservas: <?php echo $reservas ?>   
+                                                      <br><img src="./imgs/check.png" alt="Icono Falta" class="icono_info"> Asistencias: <?php echo $_SESSION["Racha"] ?> 
+                                                      <br><img src="./imgs/falta.png" alt="Icono Falta" class="icono_info"> Faltas: <?php echo $_SESSION["Faltas"]?></div>
         </div>
 
         <section id="reservas">
@@ -227,7 +256,7 @@
             </div>
         </section>
 
-        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios 🔻</div>
+        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios <img src="./imgs/btn_triangulo_1.png" class="btn_triangulo"></div>
 
         <section class="info_container" id="beneficios_container" style="display: none;">
             <div class="niveles_container">
@@ -306,6 +335,8 @@
 <?php include("./nav_desplegable.php") ?>
 <script>
     // var navbar_desplegable = document.querySelector(".navbar_desplegable");
+
+    var container_reservas = document.getElementById("container_reservas");
     var div_beneficios = document.getElementById("beneficios");
     var beneficios_container = document.getElementById("beneficios_container");
     // var flag = false;
@@ -315,27 +346,34 @@
         flag_beneficios = !flag_beneficios;
         if(flag_beneficios)
         {
+            var img = document.createElement("img");
+            img.setAttribute("src", "./imgs/btn_triangulo_2.png");
+            img.className = "btn_triangulo";
             beneficios_container.style.display = "flex";
             div_beneficios.className = "beneficios_activo";
-            div_beneficios.innerHTML = "Ver Beneficios 🔺"
+            div_beneficios.innerHTML = "Ver Beneficios"
+            div_beneficios.appendChild(img);
+            
         }
         else
         {
+            var img = document.createElement("img");
+            img.setAttribute("src", "./imgs/btn_triangulo_1.png");
+            img.className = "btn_triangulo";
             beneficios_container.style.display = "none";
             div_beneficios.className = "beneficios_inactivo";
-            div_beneficios.innerHTML = "Ver Beneficios 🔻"
+            div_beneficios.innerHTML = "Ver Beneficios"
+            div_beneficios.appendChild(img);
         }
     })
 
-    // document.getElementById("boton_desplegable").addEventListener('click', ()=>{
-    //     flag = !flag;
-    //     if(flag)
-    //     {
-    //         navbar_desplegable.style.display = "block";
-    //     }
-    //     else
-    //     {
-    //         navbar_desplegable.style.display = "none";
-    //     }
-    // });
+    //Cuando mediante PHP no se pueda detectar que no hay reservas pendientes,
+    //que es en el caso en que habían reservas pendientes para ese día pero ya pasó la hora,
+    //se detecta mediante JavaScript con este código
+    if(container_reservas.childElementCount == 0){
+        var div = document.createElement("div");
+        div.className = "reserva";
+        div.innerHTML = "No tenés reservas pendientes...";
+        container_reservas.appendChild(div);
+    }
 </script>

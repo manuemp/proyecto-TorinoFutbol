@@ -29,6 +29,11 @@
     z-index: 3;
 }
 
+.modal_titulo{
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
 .modal_input
 {
     font-family:inherit;

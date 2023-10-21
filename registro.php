@@ -40,7 +40,6 @@
             font-size: 1.3rem;
             display: flex;
             align-items: center;
-            /* overflow: scroll; */
         }
 
         #table_registro
@@ -104,6 +103,14 @@
         {
             margin: 5px 10px;
             position: absolute;
+            right: 45%;
+        }
+
+        #arrow{
+            position: absolute;
+            height: 50px;
+            left: 10px;
+            filter: invert(1);
         }
 
         
@@ -165,6 +172,10 @@
                 font-size: 2rem;
                 margin-top: 50px;
             }
+
+            .logo{
+                right: 6px;
+            }
         }
 
     </style>
@@ -209,7 +220,8 @@
 
     <main>
         <div style="display: block;">
-            <a href="./index.php"><img src="./imgs/torinoLogoBlanco_2.png" class="logo" alt="logoTorino"></a>
+        <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
+            <img src="./imgs/torinoLogoBlanco_2.png" class="logo" alt="logoTorino">
         </div>
         <div class="registro_container">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

@@ -38,17 +38,29 @@
             overflow: scroll;
         }
 
-        .item_historial
+        .item_historial, .item_historial_falta
         {
             width: 100%;
             height: 60px;
-            background-color: whitesmoke;
-            color: #8650fe;
             display: flex;
             justify-content: center;
             border-radius: 10px;
             margin-bottom: 15px;
             transition: 1s;
+        }
+
+        .item_historial{
+            background-color: whitesmoke;
+            color: #8650fe;
+        }
+
+        .item_historial_falta{
+            background-color: crimson;
+            color: white;
+        }
+
+        .item_historial_falta:hover{
+            background-color: red;
         }
 
         .item_historial:hover
@@ -119,6 +131,12 @@
             font-size: 1.3rem;
         }
 
+        #arrow{
+            position: absolute;
+            height: 50px;
+            filter: opacity(0.5);
+        }
+
         @media(max-width: 960px){
             .td_historial{
                 font-size: 1.3rem;
@@ -133,6 +151,10 @@
             .historial{
                 padding: 0px 25px 25px 25px;
                 height: 100%;
+            }
+
+            #arrow{
+                height: 35px;
             }
         }
 
@@ -168,6 +190,7 @@
         <?php include("./nav_online.php") ?>
 
         <main>
+        <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
             <article class="historial">
                 <article id="filtros_historial" class="item_historial">
                     <form id="container_filtro" method="post" enctype="multipart/form-data">
@@ -247,13 +270,20 @@
 
     function generar_tabla(data)
     {
-        data.forEach((elemento) =>{            
+        data.forEach((elemento) =>{   
+                
                 let tr_filtro = document.createElement("tr");
                 let td_dia = document.createElement("td");
                 let td_cancha = document.createElement("td");
                 let td_hora = document.createElement("td");
-    
-                tr_filtro.className = "item_historial";
+
+                if(parseInt(elemento["Asistio"]) == 0){
+                    tr_filtro.className = "item_historial_falta";
+                }
+                else
+                {
+                    tr_filtro.className = "item_historial";
+                }
     
                 td_dia.innerHTML = elemento["Dia"];
                 td_dia.className = "td_historial";

@@ -96,6 +96,12 @@
             height: 100%;
         }
 
+        #arrow{
+            position: absolute;
+            height: 50px;
+            filter: opacity(0.5);
+        }
+
         @media (max-width: 900px){
             .select_reserva{
                 height: 50px;
@@ -117,6 +123,10 @@
 
             #reservar{
                 width: 40%;
+            }
+
+            #arrow{
+                height: 30px;
             }
         }
 
@@ -141,9 +151,10 @@
 <body>
     <?php include("./nav_online.php") ?>
     <main>
+        <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
         <form action="./generar_reserva.php" method="post">
             <section id="reservas">
-                <div class="titulo_reserva">Hacé tu reserva</div><br>
+                <h1 class="titulo_reserva" style="margin: 0;">Hacé tu reserva</h1><br>
                 <select name="select_dia" class="select_reserva" id="select_dia">
                     <?php 
                         for($i = $dia_inicio ; $i < $dia_limite ; $i++)
@@ -216,8 +227,9 @@
                 
                 //Agrego las horas ocupadas a un array
                 respuesta.forEach(rta =>{
-                    if(rta['dia'] == dia && rta['cancha'] == cancha)
+                    if(rta['dia'] == dia && rta['cancha'] == cancha && parseInt(rta['asistio']) == 1)
                     {
+                        console.log(rta);
                         arr.push(rta['hora']);
                     }
                 })

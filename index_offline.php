@@ -94,7 +94,7 @@
                 <span class="modal_cerrar">X</span>
             </div>
             <div class="modal_main" style="margin: auto;">
-                <h1>¡Ingresá en Torino Fútbol!</h1><br>
+                <p class="modal_titulo">¡Ingresá en Torino Fútbol!</p><br>
                 <form action="./iniciar_sesion.php" method="post">
                     <div class="form_opcion">
                         <label for="email">Correo Electrónico</label>
@@ -112,11 +112,11 @@
         </div>
 
         <!-- PORTADA -->
-        <div class="bienvenido">
+        <h1 class="bienvenido">
             Buscá tu Cancha. <br>
             Reservá. <br>
             Jugá.
-        </div>
+        </h1>
     
         <div class="info_container">
             <div class="info_titulo">Alquilá con nosotros, <br>disfrutá de los beneficios</div><br>

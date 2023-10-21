@@ -19,6 +19,12 @@
             text-shadow: 2px 2px 0px deeppink;
             text-align:center;
         }
+
+        .boton_aceptar{
+            display:block;
+            margin: auto;
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -27,10 +33,11 @@
     <p>¡Parece que tenés <u>demasiadas reservas!</u></p>
     <p>Sólo podés tener hasta 3 reservas pendientes</p>
     <p>Podrás reservar de nuevo luego del próximo partido</p>
+    <button class="boton_aceptar" id="volver">Volver</button>
 </body>
 </html>
 <script>
-    setTimeout(function(){
+    document.getElementById("volver").addEventListener('click', ()=>{
         location.href = "./index.php";
-    }, 4000);
+    });
 </script>

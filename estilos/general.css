@@ -70,7 +70,7 @@ body, html
     /* margin-top: 20px; */
     color: #8650fe;
     transition: 2s;
-    cursor: pointer;
+    cursor: default;
 }
 
 .info_titulo
@@ -126,6 +126,22 @@ label
     color: white;
     font-weight: bold;
     display: block;
+}
+
+.boton_aceptar{
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    background-color: palegreen;
+    cursor:pointer;
+    font-weight: bold;
+    font-family: inherit;
+    border-radius: 10px;
+}
+
+.boton_aceptar:hover{
+    background-color: green;
+    color: white;
 }
 
 

@@ -5,24 +5,7 @@
         header("Location:index.php");
     }
 
-    function generarCancha($cancha)
-    {
-        switch ($cancha)
-        {
-            case "1":
-                return "Fútbol 5 (A)";
-            case "2":
-                return "Fútbol 5 (B)";
-            case "3":
-                return "Fútbol 7 (A)";
-            case "4":
-                return "Fútbol 7 (B)";
-            case "5":
-                return "Fútbol 8 (A)";
-            case "6":
-                return "Fútbol 8 (B)";
-        }
-    }
+    include("./generar_cancha.php");
 
     $dia = date("d/m/Y", strtotime($_GET["dia"]));
 
@@ -33,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./estilos/general.css"> -->
+    <link rel="stylesheet" href="./estilos/general.css">
     <link rel="stylesheet" href="./estilos/index.css">
     <title>TorinoFútbol: Reserva Confirmada</title>
     <style>
@@ -79,7 +62,7 @@
             background-color: lavender;
         }
 
-        button{
+        /* button{
             padding: 15px;
             margin-top: 10px;
             border: none;
@@ -93,7 +76,7 @@
         button:hover{
             background-color: green;
             color: white;
-        }
+        } */
 
         #contactate{
             font-size: 1.8rem;
@@ -112,7 +95,7 @@
         <br>
         <div id="contactate">Contactate con el administrador para efectuar la seña:</div><br>
         <div class="info_reserva"><span style="color:darkviolet">Tel:</span> 11-11111111</div><br>
-        <button id="volver">Volver al inicio</button>
+        <button class="boton_aceptar" id="volver">Volver al inicio</button>
     </div>
 
     

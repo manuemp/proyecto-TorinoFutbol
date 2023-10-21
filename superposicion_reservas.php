@@ -19,6 +19,12 @@
             text-shadow: 2px 2px 0px deeppink;
             text-align:center;
         }
+
+        .boton_aceptar{
+            display:block;
+            margin: auto;
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -26,10 +32,11 @@
     <p style="font-size: 5rem">Cuidado...</p>
     <p>¡Ya tenés otra reserva en el mismo día y hora!</p>
     <p>¡Intentá con otro horario!</p>
+    <button class="boton_aceptar" id="volver">Volver</button>
 </body>
 </html>
 <script>
-    setTimeout(function(){
-        location.href = "./reservar.php";
-    }, 4000);
+    document.getElementById("volver").addEventListener('click', ()=>{
+        location.href = "./index.php";
+    });
 </script>

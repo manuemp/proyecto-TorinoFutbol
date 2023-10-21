@@ -95,11 +95,11 @@
 
         h1{
             color:#8650fe;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
         }
 
         .item_historial{
-            width: 98%;
+            width: 100%;
             height: 60px;
             background-color: whitesmoke;
             color: #8650fe;
@@ -107,13 +107,13 @@
             justify-content: start;
             border-radius: 10px;
             margin-bottom: 5px;
-            cursor: pointer;
+            cursor: default;
             padding-left: 10px;
+            box-sizing: border-box;
         }
 
         .item_historial:hover{
-            background-color: #702eff;
-            color: white;
+            background-color: lavender;
         }
 
         table{
@@ -121,7 +121,6 @@
         }
 
         thead, th{
-            position: sticky;
             top: 0;
         }
 
@@ -136,13 +135,13 @@
         #th_historial{
             background-color: #333;
             color: white;
-            border-radius: 20px 20px 0 0;
+            border-radius: 10px 10px 0 0;
         }
 
         #filtros_historial{
             margin-top: 8px;
             color: white;
-            height: 70px;
+            height: 60px;
             background: linear-gradient(45deg, #481f9e, #8650fe 80%);
         }
 
@@ -175,21 +174,23 @@
             width: 20%
         }
 
-        .cancha, .dia, .hora, .boton{
+        .cancha, .dia, .hora{
             width: 15%;
             justify-content: center;
         }
 
         .boton{
-            text-align: right;
+            width: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
         }
-
+/* 
         .btn_baja{
             width: 60px;
             height: 60px;
             position: absolute;
-            /* right: 10px; */
-            right: 2%;
+            right: 1%;
             border-radius: 0px 10px 10px 0px;
             background-color: red;
             font-family: inherit;
@@ -198,6 +199,36 @@
             border: none;
             cursor: pointer;
             margin-top: -1px;
+        } */
+
+        .btn_falta{
+            height: 70%;
+            width: 70px;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .item_responsive{
+            width: 100%;
+            background-color:whitesmoke;
+            position:relative;
+            top: -10px;
+            display: none;
+            border-bottom: 2px solid red;
+            border-radius: 0px 0px 10px 10px;
+        }
+
+        .item_responsive td{
+            height: 48px;
+            display: flex;
+            width: 155px;
+            justify-content: space-around;
+            align-items: center;
         }
 
         #tr_btn_usuario_1{
@@ -209,9 +240,28 @@
             filter: invert(1);
         }
 
+        @media(max-width: 1070px){
+            .btn_falta{
+                width: 50px;
+                height: 50%;
+            }
+        }
+
         @media(max-width: 950px){
             .td_historial{
                 font-size: 0.8rem;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            .hora{
+                width: 14%;
+            }
+
+            .boton{
+                width: 16%;
             }
 
             #container_filtro{
@@ -220,8 +270,33 @@
         }
 
         @media(max-width: 750px){
+
+            .boton{
+                display: none;
+            }
+
+            .item_responsive{
+                display: block;
+            }
+
+            .email{
+                width: 40%;
+            }
+            
+            .nombre, .apellido{
+                display: none;
+            }
+
+            .cancha, .dia, .hora{
+                width: 20%;
+            }
+
+            .item_responsive td{
+                width: 125px;
+            }
+
             #filtros_historial{
-                height: 35px;
+                height: 40px;
                 border-radius: 0px;
             }
 
@@ -233,13 +308,10 @@
                 box-sizing: border-box;
             }
 
-            .nombre, .apellido{
-                display: none;
+            .icono_eliminar{
+                height: 15px;
             }
 
-            .cancha, .dia, .hora{
-                width: 20%;
-            }
         }
 
         @media(max-width: 450px){
@@ -255,22 +327,32 @@
                 width: 115px;
             }
 
+            .item_historial{
+                height: 40px;
+            }
+
             .td_historial{
                 font-size: 0.55rem;
             }
 
-            #filtro_email{
+            #filtro_dia{
                 display: none;
             }
 
-            .btn_baja{
-                width: 34px;
+            .btn_falta{
+                font-size: 0.6rem;
             }
-        }
 
-        @media(min-width: 451px){
-            .btn_baja:hover{
-                width: 100px;
+            .icono_eliminar{
+                height: 12px;
+            }
+
+            .item_responsive td{
+                height: 40px;
+            }
+
+            h1{
+                font-size: 1.8rem;
             }
         }
 
@@ -279,7 +361,7 @@
 </head>
 <body>
     <?php include("./nav_admin.php") ?>
-    <h1>Reservas</h1>
+    <h1>Administrar Reservas</h1>
     <article id="filtros_historial" class="item_historial">
         <form id="container_filtro" method="post" enctype="multipart/form-data">
             <select name="filtro_cancha" id="filtro_cancha">
@@ -313,7 +395,7 @@
                 <th class="cancha td_historial">Cancha</th>
                 <th class="dia td_historial">Día</th>
                 <th class="hora td_historial">Hora</th>
-                <th class="hora td_historial"></th>
+                <th class="boton td_historial"></th>
             </tr>
         </thead>
         <tbody id="body_tabla">
@@ -367,6 +449,8 @@
     {
         data.forEach((elemento) =>{            
             let tr_filtro = document.createElement("tr");
+            let tr_responsive = document.createElement("tr");
+
             let td_nombre = document.createElement("td");
             let td_apellido = document.createElement("td");
             let td_email = document.createElement("td");
@@ -374,11 +458,20 @@
             let td_cancha = document.createElement("td");
             let td_hora = document.createElement("td");
             let td_boton = document.createElement("td");
+
             let boton = document.createElement("button");
+            let boton_falta = document.createElement("button");
             let tacho = document.createElement("img");
+            let tacho_responsive = document.createElement("img");
+
+            let td_boton_responsive = document.createElement("td");
+            let boton_responsive = document.createElement("button");
+            let boton_falta_responsive = document.createElement("button");
+
 
             //Creo el tr con los datos de la reserva del usuario
             tr_filtro.className = "item_historial";
+            tr_responsive.className = "item_responsive";
 
             td_nombre.innerHTML = elemento["nombre"];
             td_nombre.className = "nombre td_historial";
@@ -392,24 +485,47 @@
             td_cancha.className = "cancha td_historial";
             td_hora.innerHTML = elemento["hora"];
             td_hora.className = "hora td_historial";
-            // td_boton.className = "boton td_historial";
             td_boton.className = "boton";
             tacho.setAttribute("src", "./imgs/eliminar.png");
             tacho.className = "icono_eliminar";
+            boton_falta.innerHTML = "FALTA";
+            boton_falta.className = "btn_falta";
 
-            boton.setAttribute("id", `${elemento["id"]}`);
-            boton.className = "btn_baja";
-            // boton.innerHTML = "Baja"
+            
+            // boton.setAttribute("id", `${elemento["id"]}`);
+            boton.className = "btn_falta";
+            boton.appendChild(tacho);
 
             boton.addEventListener('click', ()=>{
                 baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
                              elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
             })
 
-            boton.appendChild(tacho);
+            boton_falta.addEventListener('click', ()=>{
+                aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
+                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+            })
 
+            tacho_responsive.setAttribute("src", "./imgs/eliminar.png");
+            tacho_responsive.className = "icono_eliminar";
+            boton_responsive.className = "btn_falta";
+            // boton_responsive.setAttribute("id", `${elemento["id"]}`);
+            boton_responsive.appendChild(tacho_responsive);
+            boton_falta_responsive.innerHTML = "FALTA";
+            boton_falta_responsive.className = "btn_falta";
+
+            boton_responsive.addEventListener('click', ()=>{
+                baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
+                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+            })
+
+            boton_falta_responsive.addEventListener('click', ()=>{
+                aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
+                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+            })
+
+            td_boton.appendChild(boton_falta);
             td_boton.appendChild(boton);
-
             tr_filtro.appendChild(td_nombre);
             tr_filtro.appendChild(td_apellido);
             tr_filtro.appendChild(td_email);
@@ -418,7 +534,12 @@
             tr_filtro.appendChild(td_hora);
             tr_filtro.appendChild(td_boton);
 
+            td_boton_responsive.appendChild(boton_falta_responsive);
+            td_boton_responsive.appendChild(boton_responsive);
+            tr_responsive.appendChild(td_boton_responsive);
+
             body_tabla.appendChild(tr_filtro);
+            body_tabla.appendChild(tr_responsive);
 
         });
     }
@@ -433,7 +554,8 @@
             $.ajax({
                 url: './baja_reserva.php',
                 method: 'post',
-                data: { id_reserva : id,
+                data: { 
+                        id_reserva : id,
                         email: email_user 
                     },
                 success: function(){
@@ -443,6 +565,30 @@
             });
         }
     }
+
+    function aplicar_falta(id, email_user, nombre, apellido, hora, cancha, dia){
+        let confirmar = confirm(`¿Desea aplicar una falta al usuario?\n
+                        Nombre: ${nombre} ${apellido}\n
+                        Email: ${email_user}\n
+                        Dia: ${dia}, ${hora}hs\n
+                        Cancha: ${cancha}`);
+        if(confirmar){
+            $.ajax({
+                url: './aplicar_falta.php',
+                method: 'post',
+                data: { 
+                        id_reserva : id,
+                        email: email_user 
+                    },
+                success: function(){
+                    alert(`Se aplicó la falta a ${nombre} ${apellido}`);
+                    traer_datos();
+                }
+            });
+        }
+    }
+
+
 
 
 
