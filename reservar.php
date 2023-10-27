@@ -3,15 +3,32 @@
     include("./conexion.php");
     $email = $_SESSION["Email"];
 
-    $consulta = mysqli_query($conexion, "SELECT COUNT(1) AS 'Contador' FROM Reservas WHERE Email = '$email' AND DATEDIFF(Dia, CURRENT_DATE()) > 0");
-    $fila = $consulta->fetch_assoc();
+    date_default_timezone_set("America/Argentina/Buenos_Aires");
+    $hora = date('H:i');
+    $hoy = date('Y-m-d');
+    $contador = 0;
 
-    if(intval($fila["Contador"]) >= 3)
+    $consulta = mysqli_query($conexion, "SELECT * FROM Reservas WHERE Email = '$email' AND DATEDIFF(Dia, CURRENT_DATE()) >= 0");
+
+    // Las reservas que son del mismo día pero de una hora que ya pasó no se van a 
+    // contabilizar para la restricción de 3 reservas, ya que no son más reservas pendientes
+    while($fila = $consulta->fetch_assoc())
+    {
+        if($fila["Dia"] == $hoy)
+        {
+            if(strtotime($hora) < strtotime($fila["Hora"]))
+                $contador += 1;
+        }
+        else
+        {
+            $contador += 1;
+        }
+    }
+
+    if($contador >= 3)
     {
         header("Location:exceso_reservas.php");
     }
-
-    date_default_timezone_set("America/Argentina/Buenos_Aires");
     
     //Indices de i para el bucle del select del día para reservar
     $dia_inicio = 0;
@@ -35,6 +52,15 @@
     <link rel="stylesheet" href="./estilos/index.css">
     <title>Reservas</title>
     <style>
+        
+        body
+        {
+            width: 100%;
+            min-height: 100vh;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
         #reservas
         {
@@ -42,7 +68,7 @@
             width: 100%;
             height: 100%;
             background-color: white;
-            padding: 40px;
+            padding: 40px 40px 0px 40px;
             box-sizing: border-box;
             overflow: scroll;
         }
@@ -59,9 +85,11 @@
 
         .select_reserva
         {
-            width: 50%;
+            /* width: 50%; */
+            width: 45%;
             display: block;
-            margin: 20px auto;
+            /* margin: 20px auto; */
+            margin: 14px auto;
             height: 60px;
             font-size: 2rem;
             font-weight: bold;
@@ -72,20 +100,48 @@
             cursor: pointer;
         }
 
-        body
+
+        .container_reserva
         {
-            width: 100%;
-            min-height: 100vh;
-            height: 100%;
-            background-repeat: no-repeat;
-            background-size: cover;
+            display: flex;
+            flex-wrap: wrap;
+            width: 45%;
+            justify-content: space-between;
+            align-items: center;
+            margin: auto;
         }
 
         #reservar
         {
-            width: 20%;
+            box-shadow: 2px 2px 7px 1px lightblue;
+            border: none;
+            width: 36%;
             background-color: greenyellow;
             cursor: pointer;
+            margin: 0;
+        }
+
+        #precio{
+            width: 260px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 2.2rem;
+            height: 60px;
+            padding: 15px;
+            box-sizing: border-box;
+            color: crimson;
+        }
+
+        #beneficio{
+            padding: 10px;
+            color: palegreen;
+            display: none;
+            border-radius: 20px;
+            background: green;
+            margin: 25px auto;
+            width: 160px;
+            text-align: center;
+            font-size: 2rem;
         }
 
         main{
@@ -100,6 +156,24 @@
             position: absolute;
             height: 50px;
             filter: opacity(0.5);
+        }
+
+
+        @media(max-width: 1000px){
+            #reservar{
+                width: 260px;
+            }
+
+            .container_reserva{
+                justify-content: center;
+                width: 100%;
+            }
+
+            #precio{
+                text-align: center;
+                font-size: 2rem;
+                width: 100%;
+            }
         }
 
         @media (max-width: 900px){
@@ -122,7 +196,7 @@
             }
 
             #reservar{
-                width: 40%;
+                width: 200px;
             }
 
             #arrow{
@@ -130,14 +204,18 @@
             }
         }
 
-        @media(max-width: 380px){
+        @media(max-width: 450px){
             .select_reserva{
                 width: 100%;
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
 
             #reservar{
-                width: 60%;
+                width: 100%;
+            }
+
+            #beneficio{
+                width: 100px;
             }
 
             .titulo_reserva{
@@ -165,7 +243,7 @@
                 </select>
             
                 <select name="select_cancha" class="select_reserva" id="select_cancha">
-                    <option value="-1">Seleccionar Cancha</option>
+                    <option value="">Seleccionar Cancha</option>
                     <option value="1">F5 A</option>
                     <option value="2">F5 B</option>
                     <option value="3">F7 A</option>
@@ -177,8 +255,12 @@
                 <select name="select_hora" class="select_reserva" id="select_hora" disabled>
                     <option value="">Seleccione día y cancha</option>
                 </select>
-
-                <input type="submit" class="select_reserva" value="Reservar" id="reservar" disabled>
+                
+                <div class="container_reserva">
+                    <input type="submit" class="select_reserva" value="Reservar" id="reservar" disabled>
+                    <div id="precio">Total: $0.00</div>
+                </div>
+                <div id="beneficio"></div>
             </section>
         </form>
     </main>
@@ -195,6 +277,7 @@
     let select_hora = document.getElementById("select_hora");
     let select_dia = document.getElementById("select_dia");
     let select_cancha = document.getElementById("select_cancha");
+    let btn_reserva = document.getElementById("reservar");
 
     let dia;
     let cancha;
@@ -206,10 +289,49 @@
     select_dia.addEventListener('change', filtrar_horarios);
 
     select_cancha.addEventListener('change', ()=>{
-        select_hora.removeAttribute("disabled");
-        document.getElementById("reservar").removeAttribute("disabled");
-        filtrar_horarios();
+        console.log(select_cancha.value)
+        if(select_cancha.value == "") 
+        {
+            select_hora.setAttribute("disabled", "");
+            btn_reserva.setAttribute("disabled", "");
+            document.getElementById("precio").innerHTML = "Total: $0,00";
+        }
+        else
+        {
+            select_hora.removeAttribute("disabled");
+            btn_reserva.removeAttribute("disabled");
+            filtrar_horarios();
+            dar_precio();
+
+        }
     });
+
+    function dar_precio()
+    {
+        let beneficio = document.getElementById("beneficio");
+        $.ajax({
+            url: './precio_cancha.php',
+            type: 'post',
+            data: {
+                id_cancha: $("#select_cancha").val()
+            },
+            success: function (data) {
+                const respuesta = JSON.parse(data); 
+                const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+                });
+
+                document.getElementById("precio").innerHTML = `Total: ${formatter.format(respuesta["precio"])}`;
+                console.log(respuesta["beneficio"]);
+                if(respuesta["beneficio"] != "")
+                {
+                    beneficio.style.display = "block";
+                    beneficio.innerHTML = respuesta["beneficio"];
+                }
+            }
+        });
+    }
 
     function filtrar_horarios()
     {

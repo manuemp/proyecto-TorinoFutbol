@@ -95,6 +95,7 @@
             </div>
             <div class="modal_main" style="margin: auto;">
                 <p class="modal_titulo">¡Ingresá en Torino Fútbol!</p><br>
+                <span style="font-size: 1rem; color: gray; display: block; margin-top: -15px">admin: adminTorino@gmail.com - pass: 12345678</span>
                 <form action="./iniciar_sesion.php" method="post">
                     <div class="form_opcion">
                         <label for="email">Correo Electrónico</label>
@@ -209,23 +210,8 @@
     var modal_fail = document.getElementById("modal_inicio_sesion_fail");
     var cerrar_modal = document.querySelectorAll(".modal_cerrar");
     var modal_background = document.getElementById("modal_background");
-    // var navbar_desplegable = document.querySelector(".navbar_desplegable");
-    // var flag = false;
-
+    
     window.onbeforeunload = history.pushState(null, null, "index.php");
-
-    // document.getElementById("boton_desplegable").addEventListener('click', ()=>{
-    //     flag = !flag;
-    //     if(flag)
-    //     {
-    //         navbar_desplegable.style.display = "block";
-    //     }
-    //     else
-    //     {
-    //         navbar_desplegable.style.display = "none";
-    //     }
-    // });
-
     
     iniciar_sesion.addEventListener('click', ()=>
     {

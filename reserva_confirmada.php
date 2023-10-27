@@ -62,22 +62,6 @@
             background-color: lavender;
         }
 
-        /* button{
-            padding: 15px;
-            margin-top: 10px;
-            border: none;
-            background-color: palegreen;
-            cursor:pointer;
-            font-weight: bold;
-            font-family: inherit;
-            border-radius: 10px;
-        }
-
-        button:hover{
-            background-color: green;
-            color: white;
-        } */
-
         #contactate{
             font-size: 1.8rem;
         }
@@ -103,6 +87,8 @@
 </html>
 
 <script>
+    window.onbeforeunload = history.pushState(null, null, "index.php");
+    
     document.getElementById("volver").addEventListener("click", ()=>{
         location.href = "./index.php";
     });

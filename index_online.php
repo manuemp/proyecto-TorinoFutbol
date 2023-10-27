@@ -1,6 +1,7 @@
 <?php
 
     include("./actualizar_sesion.php");
+    date_default_timezone_set("America/Argentina/Buenos_Aires");
 
     if($_SESSION["Racha"] >= 60)
     {

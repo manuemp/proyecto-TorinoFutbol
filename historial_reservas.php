@@ -38,7 +38,7 @@
             overflow: scroll;
         }
 
-        .item_historial, .item_historial_falta
+        .item_historial, .item_historial_falta, .header_historial
         {
             width: 100%;
             height: 60px;
@@ -112,10 +112,18 @@
         {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: start;
             align-items: center;
             padding-left: 20px;
             padding-right: 20px;
+        }
+
+        input[type='checkbox']
+        {
+            height: 20px;
+            width: 20px;
+            margin-left: 4%;
+            margin-right: 10px;
         }
 
         select, button
@@ -169,7 +177,7 @@
             }
 
             select{
-                width: 100%;
+                width: 80%;
                 height: 30px;
                 font-size: 1rem;
             }
@@ -192,7 +200,7 @@
         <main>
         <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
             <article class="historial">
-                <article id="filtros_historial" class="item_historial">
+                <article id="filtros_historial" class="header_historial">
                     <form id="container_filtro" method="post" enctype="multipart/form-data">
                         <select name="filtro_cancha" id="filtro_cancha">
                             <option value="" selected>Todas las Canchas</option>
@@ -204,11 +212,13 @@
                             <option value="6">F8 (B)</option>
                         </select>
                         <!-- <button>Buscar</button> -->
+                        <input type="checkbox" id="check">
+                        <span style="font-size: 1.2rem;">Faltas</span>
                     </form>
                 </article>
                 <table id="tabla">
                     <thead>
-                        <tr id="th_historial" class="item_historial">
+                        <tr id="th_historial" class="header_historial">
                             <th class="td_historial">Día</th>
                             <th class="td_historial">Cancha</th>
                             <th class="td_historial">Hora</th>
@@ -228,12 +238,21 @@
 
     let filtro = document.getElementById("filtro_cancha");
     let body_tabla = document.getElementById("body_tabla");
-
+    let check = document.getElementById("check");
+    var checkflag = false;
+    
     filtrar_reservas();
+
+
+    check.addEventListener('change', ()=>{
+        mostrar_ocultar_faltas();
+    })
 
     filtro.addEventListener('change', ()=>{
         filtrar_reservas();
     });
+
+    //FUNCIONES
 
     function filtrar_reservas()
     {
@@ -271,34 +290,50 @@
     function generar_tabla(data)
     {
         data.forEach((elemento) =>{   
-                
-                let tr_filtro = document.createElement("tr");
-                let td_dia = document.createElement("td");
-                let td_cancha = document.createElement("td");
-                let td_hora = document.createElement("td");
+            let tr_filtro = document.createElement("tr");
+            let td_dia = document.createElement("td");
+            let td_cancha = document.createElement("td");
+            let td_hora = document.createElement("td");
 
-                if(parseInt(elemento["Asistio"]) == 0){
-                    tr_filtro.className = "item_historial_falta";
-                }
-                else
-                {
-                    tr_filtro.className = "item_historial";
-                }
-    
-                td_dia.innerHTML = elemento["Dia"];
-                td_dia.className = "td_historial";
-                td_cancha.innerHTML = elemento["Cancha"];
-                td_cancha.className = "td_historial";
-                td_hora.innerHTML = elemento["Hora"];
-                td_hora.className = "td_historial";
-    
-                tr_filtro.appendChild(td_dia);
-                tr_filtro.appendChild(td_cancha);
-                tr_filtro.appendChild(td_hora);
-    
+            if(parseInt(elemento["Asistio"]) == 0){
+                tr_filtro.className = "item_historial_falta";
+            }
+            else
+            {
+                tr_filtro.className = "item_historial";
+            }
 
-                body_tabla.appendChild(tr_filtro);
-            });
+            td_dia.innerHTML = elemento["Dia"];
+            td_dia.className = "td_historial";
+            td_cancha.innerHTML = elemento["Cancha"];
+            td_cancha.className = "td_historial";
+            td_hora.innerHTML = elemento["Hora"];
+            td_hora.className = "td_historial";
+
+            tr_filtro.appendChild(td_dia);
+            tr_filtro.appendChild(td_cancha);
+            tr_filtro.appendChild(td_hora);
+
+            body_tabla.appendChild(tr_filtro);
+        });
+    }
+
+    function mostrar_ocultar_faltas()
+    {
+        let sin_falta = document.querySelectorAll(".item_historial");
+        checkflag = !checkflag;
+        if(checkflag == true)
+        {
+            sin_falta.forEach((item)=>{
+                item.style.display = "none";
+            })
+        }
+        else
+        {
+            sin_falta.forEach((item)=>{
+                item.style.display = "flex";
+            })
+        }
     }
 
 </script>
