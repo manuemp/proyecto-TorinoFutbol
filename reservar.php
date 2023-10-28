@@ -145,7 +145,7 @@
         }
 
         main{
-            height: 62vh;
+            height: 68vh;
         }
 
         form{
@@ -258,8 +258,9 @@
                 
                 <div class="container_reserva">
                     <input type="submit" class="select_reserva" value="Reservar" id="reservar" disabled>
-                    <div id="precio">Total: $0.00</div>
+                    <div id="precio">Total: $0.00</input>
                 </div>
+                <input type="hidden" name="precio_hidden" id="precio_hidden" value="">
                 <div id="beneficio"></div>
             </section>
         </form>
@@ -278,6 +279,7 @@
     let select_dia = document.getElementById("select_dia");
     let select_cancha = document.getElementById("select_cancha");
     let btn_reserva = document.getElementById("reservar");
+    let precio = document.getElementById("precio");
 
     let dia;
     let cancha;
@@ -294,7 +296,7 @@
         {
             select_hora.setAttribute("disabled", "");
             btn_reserva.setAttribute("disabled", "");
-            document.getElementById("precio").innerHTML = "Total: $0,00";
+            precio.innerHTML = "Total: $0,00";
         }
         else
         {
@@ -302,7 +304,6 @@
             btn_reserva.removeAttribute("disabled");
             filtrar_horarios();
             dar_precio();
-
         }
     });
 
@@ -322,7 +323,9 @@
                 currency: 'USD'
                 });
 
-                document.getElementById("precio").innerHTML = `Total: ${formatter.format(respuesta["precio"])}`;
+                precio.innerHTML = `Total: ${formatter.format(respuesta["precio"])}`;
+                document.getElementById("precio_hidden").value = respuesta["precio"];
+
                 console.log(respuesta["beneficio"]);
                 if(respuesta["beneficio"] != "")
                 {

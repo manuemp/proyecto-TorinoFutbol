@@ -10,7 +10,7 @@
     $dia = $_POST["filtro_dia"];
     $email = $_POST["filtro_email"];
 
-    $resultado = mysqli_query($conexion, "SELECT ID, Dia, Hora, Cancha, Nombre, Apellido, Email FROM Reservas WHERE Dia >= '$hoy' AND Cancha LIKE '%$cancha%' AND Email LIKE '%$email%' AND Dia LIKE '%$dia%' AND Asistio = 1 ORDER BY Dia");
+    $resultado = mysqli_query($conexion, "SELECT ID, Dia, Hora, Cancha, Nombre, Apellido, Email, Asistio, Precio, Adelanto FROM Reservas WHERE Dia >= '$hoy' AND Cancha LIKE '%$cancha%' AND Email LIKE '%$email%' AND Dia LIKE '%$dia%' AND Asistio = 1 ORDER BY Dia");
     $contador = mysqli_num_rows($resultado);
     
     $arr = [];
@@ -24,6 +24,8 @@
         $obj->nombre = $fila['Nombre'];
         $obj->apellido = $fila['Apellido'];
         $obj->email = $fila['Email'];
+        $obj->precio = $fila['Precio'];
+        $obj->adelanto = $fila['Adelanto'];
         array_push($arr, $obj);
     }
     

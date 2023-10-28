@@ -6,12 +6,13 @@
 
 body, html
 {
-    background: linear-gradient(45deg, lavender, transparent);
+    background: linear-gradient(45deg, lavender, white);
     min-height: 100vh;
     margin: 0;
     padding: 0;
     display: block;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-family: 'Helvetica Neue', sans-serif;
     font-size: 12px;
     margin: auto;
 }

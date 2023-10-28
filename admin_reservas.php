@@ -25,14 +25,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/modal.css">
     <script src="./jquery.js"></script>
     <title>TorinoFútbol: Admin - Reservas</title>
     <style>
         body, html{
             height: 100%;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            /* padding-right: 5px;
-            box-sizing: border-box; */
+            /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 5px;
         }
 
         .nav_admin{
@@ -107,9 +109,10 @@
             justify-content: start;
             border-radius: 10px;
             margin-bottom: 5px;
-            cursor: default;
+            cursor: pointer;
             padding-left: 10px;
             box-sizing: border-box;
+
         }
 
         .item_historial:hover{
@@ -136,6 +139,7 @@
             background-color: #333;
             color: white;
             border-radius: 10px 10px 0 0;
+            cursor: default;
         }
 
         #filtros_historial{
@@ -143,6 +147,7 @@
             color: white;
             height: 60px;
             background: linear-gradient(45deg, #481f9e, #8650fe 80%);
+            cursor:default;
         }
 
         #container_filtro{
@@ -185,21 +190,6 @@
             align-items: center;
             justify-content: space-evenly;
         }
-/* 
-        .btn_baja{
-            width: 60px;
-            height: 60px;
-            position: absolute;
-            right: 1%;
-            border-radius: 0px 10px 10px 0px;
-            background-color: red;
-            font-family: inherit;
-            color: white;
-            transition: 1s;
-            border: none;
-            cursor: pointer;
-            margin-top: -1px;
-        } */
 
         .btn_falta{
             height: 70%;
@@ -239,6 +229,87 @@
             height: 20px;
             filter: invert(1);
         }
+
+
+        /* Modal Admin */
+
+        #modal_admin{
+            display: none;
+            z-index: 3;
+            width: 500px;
+            height: 460px;
+            background-color: white;
+            border-radius: 20px;
+            border: 2px solid black;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-left: -250px;
+            margin-top: -230px;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .campo_admin{
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            box-sizing: border-box;
+            /* background-color: lavender; */
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color:#481f9e;
+        }
+
+        .botones_admin{
+            position: absolute;
+            bottom: 35px;
+            right: 10px;
+            width: 100%;
+            text-align: right;
+        }
+
+        #modal_adm_salir, #modal_adm_guardar{
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 70px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-family: inherit;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        #modal_adm_salir{
+            background-color: crimson;
+        }
+
+        #modal_adm_guardar{
+            background-color:#7643e5;
+        }
+
+        #modal_adm_salir:hover{
+            background-color: red;
+        }
+
+        #modal_adm_guardar:hover{
+            background-color:#8650fe;
+        }
+
+        #input_senia{
+            font-size: 1.3rem;
+            border-bottom: 2px solid lightgray;
+            border-radius: 0;
+            width: 115px;
+            color: inherit;
+            text-align: left;
+            height: 25px;
+            padding-left: 8px;
+        }
+
+
 
         @media(max-width: 1070px){
             .btn_falta{
@@ -312,9 +383,15 @@
                 height: 15px;
             }
 
+            #input_senia{
+                border-left: none;
+                border-top: none;
+                border-right:none;
+            }
+
         }
 
-        @media(max-width: 450px){
+        @media(max-width: 500px){
             .cancha{
                 display: none;
             }
@@ -354,14 +431,43 @@
             h1{
                 font-size: 1.8rem;
             }
+
+            #modal_admin{
+                width: 100%;
+                margin-left: 0px;
+                left: 0;
+                padding: 20px 10px;
+            }
+
+            .campo_admin, #input_senia{
+                font-size: 1rem;
+            }
+
+            #input_senia{
+                width: 65px;
+            }
         }
 
 
     </style>
 </head>
+<div id="modal_background"></div>
 <body>
     <?php include("./nav_admin.php") ?>
     <h1>Administrar Reservas</h1>
+
+    <section id="modal_admin">
+        <input type="hidden" id="modal_hidden">
+        <div class="campo_admin" id="modal_numero_reserva" style="border-bottom: 2px solid red;">Reserva n° 117</div>
+        <div class="campo_admin" id="modal_nombre"></div>
+        <div class="campo_admin" id="modal_dia"></div>
+        <div class="campo_admin" id="modal_cancha"></div>
+        <div class="campo_admin" id="modal_mail"></div>
+        <div class="campo_admin" id="modal_senia">Seña: $<input type="text" id="input_senia"><span style="color:lightgray" id="debe">Debe: </span></div>
+        <div class="campo_admin" id="modal_precio">Total: <span style="color: crimson">$22.000,00</span></div>
+        <div class="botones_admin"><button id="modal_adm_salir">Salir</button><button id="modal_adm_guardar">Guardar</button></div>
+    </section>
+
     <article id="filtros_historial" class="item_historial">
         <form id="container_filtro" method="post" enctype="multipart/form-data">
             <select name="filtro_cancha" id="filtro_cancha">
@@ -409,8 +515,43 @@
     let filtro_cancha = document.getElementById("filtro_cancha");
     let filtro_dia = document.getElementById("filtro_dia");
     let filtro_email = document.getElementById("filtro_email");
+    var modal_admin = document.getElementById("modal_admin");
+    var modal_background = document.getElementById("modal_background");
+    var flag_btn = false;
+    
 
+    //Formatter para el total en el modal (signo, coma y punto para el monto)
+    const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+    
+    //Traer datos automáticamente antes de cargar la página
     traer_datos();
+
+    document.getElementById("modal_adm_salir").addEventListener('click', ()=>{
+        modal_admin.style.display = "none";
+        modal_background.style.display = "none";
+    })
+
+    document.getElementById("modal_adm_guardar").addEventListener('click', ()=>{
+        modal_admin.style.display = "none";
+        console.log(document.getElementById("modal_hidden").value);
+        $.ajax({
+            url: './actualizar_senia.php',
+            method: 'post',
+            data: {
+                id: $("#modal_hidden").val(),
+                senia: $("#input_senia").val()
+            },
+            success: function(res)
+            {
+                traer_datos();
+            }
+        })
+        modal_background.style.display = "none";
+    })
+
 
     filtro_cancha.addEventListener('change', ()=> {
         traer_datos();
@@ -424,10 +565,7 @@
         traer_datos();
     })
 
-
-
     function traer_datos(){
-        
         $.ajax({
             url: './reservas_disponibles_admin.php',
             method: 'post',
@@ -450,6 +588,7 @@
         data.forEach((elemento) =>{            
             let tr_filtro = document.createElement("tr");
             let tr_responsive = document.createElement("tr");
+            let span_filtro = document.createElement("span");
 
             let td_nombre = document.createElement("td");
             let td_apellido = document.createElement("td");
@@ -468,42 +607,43 @@
             let boton_responsive = document.createElement("button");
             let boton_falta_responsive = document.createElement("button");
 
-
             //Creo el tr con los datos de la reserva del usuario
             tr_filtro.className = "item_historial";
             tr_responsive.className = "item_responsive";
 
             td_nombre.innerHTML = elemento["nombre"];
-            td_nombre.className = "nombre td_historial";
+            td_nombre.className = `nombre td_historial`;
+            // td_nombre.setAttribute("name", elemento["id"]);
             td_apellido.innerHTML = elemento["apellido"];
-            td_apellido.className = "apellido td_historial";
+            td_apellido.className = "apellido td_historial ";
             td_email.innerHTML = elemento["email"];
-            td_email.className = "email td_historial";
+            td_email.className = "email td_historial ";
             td_dia.innerHTML = elemento["dia"];
-            td_dia.className = "dia td_historial";
+            td_dia.className = "dia td_historial ";
             td_cancha.innerHTML = elemento["cancha"];
-            td_cancha.className = "cancha td_historial";
+            td_cancha.className = "cancha td_historial ";
             td_hora.innerHTML = elemento["hora"];
-            td_hora.className = "hora td_historial";
+            td_hora.className = "hora td_historial ";
             td_boton.className = "boton";
             tacho.setAttribute("src", "./imgs/eliminar.png");
             tacho.className = "icono_eliminar";
             boton_falta.innerHTML = "FALTA";
             boton_falta.className = "btn_falta";
 
-            
-            // boton.setAttribute("id", `${elemento["id"]}`);
             boton.className = "btn_falta";
             boton.appendChild(tacho);
 
             boton.addEventListener('click', ()=>{
                 baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
                              elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                flag_btn = true;
             })
 
             boton_falta.addEventListener('click', ()=>{
                 aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
                              elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                console.log("boton_falta!");
+                flag_btn = true;
             })
 
             tacho_responsive.setAttribute("src", "./imgs/eliminar.png");
@@ -538,18 +678,38 @@
             td_boton_responsive.appendChild(boton_responsive);
             tr_responsive.appendChild(td_boton_responsive);
 
+            //Lleno el modal cuando se haga click en el registro creado
+            tr_filtro.addEventListener('click', ()=>{
+                if(!flag_btn)
+                {
+                    modal_admin.style.display = "block";
+                    modal_background.style.display = "block";
+                    document.getElementById("modal_hidden").value = elemento["id"];
+                    document.getElementById("modal_numero_reserva").innerHTML = `Reserva n° ${elemento["id"]}`;
+                    document.getElementById("modal_nombre").innerHTML = `${elemento["nombre"]} ${elemento["apellido"]}`;
+                    document.getElementById("modal_dia").innerHTML = elemento["dia"];
+                    document.getElementById("modal_cancha").innerHTML = `${elemento["cancha"]} -  ${elemento["hora"]}hs`;
+                    document.getElementById("modal_mail").innerHTML = elemento["email"];
+                    document.getElementById("debe").innerHTML = `Debe: ${formatter.format(parseInt(elemento["precio"]) - parseInt(elemento["adelanto"]))}`
+                    document.getElementById("modal_precio").innerHTML = `Total: <span style="color:crimson">${formatter.format(elemento["precio"])}</span>`;
+                    document.getElementById("input_senia").value = elemento["adelanto"];
+                }
+                flag_btn = false;
+            });
+
+
+
             body_tabla.appendChild(tr_filtro);
             body_tabla.appendChild(tr_responsive);
-
         });
     }
 
     function baja_reserva(id, email_user, nombre, apellido, hora, cancha, dia){
         let confirmar = confirm(`¿Desea dar de baja la reserva?\n
-                        Nombre: ${nombre} ${apellido}\n
-                        Email: ${email_user}\n
-                        Dia: ${dia}, ${hora}hs\n
-                        Cancha: ${cancha}`);
+                    Nombre: ${nombre} ${apellido}\n
+                    Email: ${email_user}\n
+                    Dia: ${dia}, ${hora}hs\n
+                    Cancha: ${cancha}`);
         if(confirmar){
             $.ajax({
                 url: './baja_reserva.php',
@@ -564,14 +724,15 @@
                 }
             });
         }
+        
     }
 
     function aplicar_falta(id, email_user, nombre, apellido, hora, cancha, dia){
         let confirmar = confirm(`¿Desea aplicar una falta al usuario?\n
-                        Nombre: ${nombre} ${apellido}\n
-                        Email: ${email_user}\n
-                        Dia: ${dia}, ${hora}hs\n
-                        Cancha: ${cancha}`);
+                    Nombre: ${nombre} ${apellido}\n
+                    Email: ${email_user}\n
+                    Dia: ${dia}, ${hora}hs\n
+                    Cancha: ${cancha}`);
         if(confirmar){
             $.ajax({
                 url: './aplicar_falta.php',

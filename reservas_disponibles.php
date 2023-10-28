@@ -1,7 +1,7 @@
 <?php 
     include("./conexion.php");
 
-    $resultado = mysqli_query($conexion, "SELECT Dia, Hora, Cancha, Nombre, Apellido, Email, Asistio FROM Reservas");
+    $resultado = mysqli_query($conexion, "SELECT Dia, Hora, Cancha, Nombre, Apellido, Email, Asistio, Precio, Adelanto FROM Reservas");
     $contador = mysqli_num_rows($resultado);
     
     $arr = [];
@@ -15,6 +15,8 @@
         $obj->apellido = $fila['Apellido'];
         $obj->email = $fila['Email'];
         $obj->asistio = $fila['Asistio'];
+        $obj->precio = $fila['Precio'];
+        $obj->adelanto = $fila['Adelanto'];
         array_push($arr, $obj);
     }
     

@@ -26,6 +26,7 @@
         #titulo_registro
         {
             font-size: 3rem;
+            font-weight: bold;
         }
 
         .registro_container
@@ -88,6 +89,7 @@
             color: white;
             font-weight: bold;
             display: block;
+            border-radius: 10px;
         }
 
         #enviar
