@@ -320,6 +320,8 @@
             </div>
         </section>
 
+        <!-- <?php //include("./faqs.php") ?> -->
+
         <br>
         <section class="info_container" id="info_niveles">
             <div class="titulo_info" style="color: white;">Evitá la roja</div>

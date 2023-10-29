@@ -63,3 +63,24 @@
 </body>
 </html>
 
+<script>
+    let preguntas = document.querySelectorAll(".pregunta");
+
+    preguntas.forEach((pregunta)=>{
+        pregunta.addEventListener('click', ()=>{
+            let respuesta = pregunta.nextElementSibling;
+            if(respuesta.style.maxHeight == "0px" || respuesta.style.maxHeight == 0)
+            {
+                respuesta.style.color = "#3e139c";
+                respuesta.children[0].style.display = "block";
+                respuesta.style.maxHeight = "500px";
+            }
+            else{
+                respuesta.style.color = "white";
+                respuesta.style.maxHeight = "0px";   
+                respuesta.children[0].style.display = "none";
+            }
+        });
+    })
+</script>
+
