@@ -309,6 +309,22 @@
             padding-left: 8px;
         }
 
+        .hoy{
+            background-color: #cdff9e;
+        }
+
+        .hoy:hover{
+            background-color: #7cff00;
+        }
+
+        .hoy_pasado{
+            background-color: #ffbc65;
+        }
+
+        .hoy_pasado:hover{
+            background-color: #ff9b4f
+        }
+
 
 
         @media(max-width: 1070px){
@@ -519,7 +535,6 @@
     var modal_background = document.getElementById("modal_background");
     var flag_btn = false;
     
-
     //Formatter para el total en el modal (signo, coma y punto para el monto)
     const formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
@@ -698,6 +713,32 @@
             });
 
 
+            //Por ultimo, veo si la reserva es de hoy y todavía no se jugó,
+            //si es de hoy y ya pasó el horario, o si no es de hoy.
+            
+            //Agrego ceros a las horas, minutos y segundos del objeto Date para que sea compatible
+            //con lo obtenido en la base de datos.
+            function addZero(i) {
+                if (i < 10) {i = "0" + i}
+                return i;
+            }
+
+            const d = new Date();
+            let hora = `${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+            let hoy = d.toLocaleDateString();
+            if(hoy == elemento["dia"])
+            {
+                if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${elemento["hora"]}`))
+                {
+                    tr_filtro.className = "item_historial hoy";
+                    tr_responsive.className = "item_responsive hoy";
+                }
+                else
+                {
+                    tr_filtro.className = "item_historial hoy_pasado";
+                    tr_responsive.className = "item_responsive hoy_pasado";
+                }
+            }
 
             body_tabla.appendChild(tr_filtro);
             body_tabla.appendChild(tr_responsive);
@@ -748,9 +789,5 @@
             });
         }
     }
-
-
-
-
 
 </script>

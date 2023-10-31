@@ -4,6 +4,7 @@
         <div>
             <a class="opcion" id="iniciar_sesion" href="#">Iniciar Sesión</a>
             <a class="opcion" href="registro.php">Registrate</a>
+            <a class="opcion" href="contacto.php">Contacto</a>
         </div>
     </div>
 </nav>
@@ -16,4 +17,5 @@
 <div class="navbar_desplegable">
     <a class="opcion_desplegable" id="iniciar_sesion_desplegable">Iniciar Sesión</a>
     <a class="opcion_desplegable" href="registro.php">Registrate</a>
+    <a class="opcion_desplegable" href="contacto.php">Contacto</a>
 </div>

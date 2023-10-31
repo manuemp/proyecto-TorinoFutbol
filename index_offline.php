@@ -95,7 +95,7 @@
             </div>
             <div class="modal_main" style="margin: auto;">
                 <p class="modal_titulo">¡Ingresá en Torino Fútbol!</p><br>
-                <span style="font-size: 1rem; color: gray; display: block; margin-top: -15px">admin: adminTorino@gmail.com - pass: 12345678</span>
+                <span style="font-size: 1rem; color: gray; display: block; margin-top: -15px">admin: admintorino@gmail.com - pass: 12345678</span>
                 <form action="./iniciar_sesion.php" method="post">
                     <div class="form_opcion">
                         <label for="email">Correo Electrónico</label>

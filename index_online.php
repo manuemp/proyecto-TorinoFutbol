@@ -34,7 +34,7 @@
     <style>
         #info_usuario
         {
-            background-image: url("./imgs/sintetico4.png");
+            background-image: url("./imgs/fondo_contacto5.jpeg");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -151,8 +151,11 @@
         }
 
         .btn_triangulo{
-            height: 15px;
+            height: 14px;
+            width: 25px;
             margin-left: 10px;
+            margin-top: 5px;
+            transition: 0.2s;
         }
 
         @media(max-width: 920px)
@@ -242,8 +245,8 @@
     <main>
         
         <div class="info_container" id="info_usuario">
-            <h1 class="titulo_info" style="color:#e1ff00; margin-bottom: 0;"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
-            <div class="texto_info" style="color: white; text-shadow: 3px 3px 0px darkviolet">
+            <h1 class="titulo_info" style="color:#e1ff00; margin-bottom: 0; margin-top: 0"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
+            <div class="texto_info" style="color: white; text-shadow: 2px 2px 50px black">
                                                       <img src="./imgs/bandera.webp" alt="Icono Falta" class="icono_info"> Jugador <?php echo $level ?> 
                                                       <br><img src="./imgs/calendario.png" alt="Icono Falta" class="icono_info"> Reservas: <?php echo $reservas ?>   
                                                       <br><img src="./imgs/check.png" alt="Icono Falta" class="icono_info"> Asistencias: <?php echo $_SESSION["Racha"] ?> 
@@ -257,7 +260,7 @@
             </div>
         </section>
 
-        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios <img src="./imgs/btn_triangulo_1.png" class="btn_triangulo"></div>
+        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios <img id="btn_beneficios" src="./imgs/btn_triangulo_1.png" class="btn_triangulo"></div>
 
         <section class="info_container" id="beneficios_container" style="display: none;">
             <div class="niveles_container">
@@ -342,6 +345,7 @@
     var container_reservas = document.getElementById("container_reservas");
     var div_beneficios = document.getElementById("beneficios");
     var beneficios_container = document.getElementById("beneficios_container");
+    var img = document.getElementById("btn_beneficios");
     // var flag = false;
     var flag_beneficios = false;
 
@@ -349,24 +353,15 @@
         flag_beneficios = !flag_beneficios;
         if(flag_beneficios)
         {
-            var img = document.createElement("img");
-            img.setAttribute("src", "./imgs/btn_triangulo_2.png");
-            img.className = "btn_triangulo";
+            img.style.transform = "rotate(180deg)";
             beneficios_container.style.display = "flex";
-            div_beneficios.className = "beneficios_activo";
-            div_beneficios.innerHTML = "Ver Beneficios"
-            div_beneficios.appendChild(img);
-            
+            div_beneficios.className = "beneficios_activo";        
         }
         else
         {
-            var img = document.createElement("img");
-            img.setAttribute("src", "./imgs/btn_triangulo_1.png");
-            img.className = "btn_triangulo";
+            img.style.transform = "rotate(360deg)";
             beneficios_container.style.display = "none";
             div_beneficios.className = "beneficios_inactivo";
-            div_beneficios.innerHTML = "Ver Beneficios"
-            div_beneficios.appendChild(img);
         }
     })
 

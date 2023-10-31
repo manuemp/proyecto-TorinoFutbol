@@ -42,6 +42,8 @@
         border-bottom: 6px solid crimson;
         cursor:default;
     }
+
+
     </style>
 </head>
 <body>
@@ -69,16 +71,25 @@
     preguntas.forEach((pregunta)=>{
         pregunta.addEventListener('click', ()=>{
             let respuesta = pregunta.nextElementSibling;
+
+            
+
             if(respuesta.style.maxHeight == "0px" || respuesta.style.maxHeight == 0)
             {
-                respuesta.style.color = "#3e139c";
+                pregunta.firstElementChild.style.transform = "rotate(180deg)";
+                respuesta.children[0].style.color = "#3e139c";
                 respuesta.children[0].style.display = "block";
                 respuesta.style.maxHeight = "500px";
             }
             else{
-                respuesta.style.color = "white";
+                pregunta.firstElementChild.style.transform = "rotate(0deg)";
+                respuesta.children[0].style.color = "white";
+                respuesta.style.transition = "max-height 0.3s ease-out"
                 respuesta.style.maxHeight = "0px";   
-                respuesta.children[0].style.display = "none";
+                setTimeout(()=>{
+                    respuesta.children[0].style.display = "none";
+                }, 300)
+                // respuesta.children[0].style.display = "none";
             }
         });
     })
