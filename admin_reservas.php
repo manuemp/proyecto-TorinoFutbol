@@ -463,8 +463,6 @@
                 width: 65px;
             }
         }
-
-
     </style>
 </head>
 <div id="modal_background"></div>
@@ -628,7 +626,6 @@
 
             td_nombre.innerHTML = elemento["nombre"];
             td_nombre.className = `nombre td_historial`;
-            // td_nombre.setAttribute("name", elemento["id"]);
             td_apellido.innerHTML = elemento["apellido"];
             td_apellido.className = "apellido td_historial ";
             td_email.innerHTML = elemento["email"];
@@ -648,6 +645,7 @@
             boton.className = "btn_falta";
             boton.appendChild(tacho);
 
+
             boton.addEventListener('click', ()=>{
                 baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
                              elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
@@ -657,14 +655,12 @@
             boton_falta.addEventListener('click', ()=>{
                 aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
                              elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
-                console.log("boton_falta!");
                 flag_btn = true;
             })
 
             tacho_responsive.setAttribute("src", "./imgs/eliminar.png");
             tacho_responsive.className = "icono_eliminar";
             boton_responsive.className = "btn_falta";
-            // boton_responsive.setAttribute("id", `${elemento["id"]}`);
             boton_responsive.appendChild(tacho_responsive);
             boton_falta_responsive.innerHTML = "FALTA";
             boton_falta_responsive.className = "btn_falta";
@@ -712,7 +708,6 @@
                 flag_btn = false;
             });
 
-
             //Por ultimo, veo si la reserva es de hoy y todavía no se jugó,
             //si es de hoy y ya pasó el horario, o si no es de hoy.
             
@@ -725,7 +720,8 @@
 
             const d = new Date();
             let hora = `${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
-            let hoy = d.toLocaleDateString();
+            let hoy = `${addZero(d.getDate())}/${addZero(d.getMonth() + 1)}/${addZero(d.getFullYear())}`
+
             if(hoy == elemento["dia"])
             {
                 if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${elemento["hora"]}`))
@@ -765,7 +761,6 @@
                 }
             });
         }
-        
     }
 
     function aplicar_falta(id, email_user, nombre, apellido, hora, cancha, dia){

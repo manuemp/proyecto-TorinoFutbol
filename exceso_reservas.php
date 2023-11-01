@@ -8,7 +8,7 @@
     <style>
         body
         {
-            background: linear-gradient(45deg, #6d2df6, #8650fe);
+            background: linear-gradient(45deg, #4c02e9, #9f78f6);
         }
 
         p

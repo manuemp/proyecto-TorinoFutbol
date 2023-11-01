@@ -33,9 +33,10 @@
         color: yellow;
         font-weight: bold;
         width: 100%;
+        text-shadow: 1px 1px 30px black;
         padding: 70px 40px 70px 30px;
         margin: auto;
-        background-image: url("./imgs/jugador_pelota4.jpeg");
+        background-image: url("./imgs/jugador_pelota2.jpeg");
         background-repeat: no-repeat;
         background-size:cover;
         box-sizing: border-box;

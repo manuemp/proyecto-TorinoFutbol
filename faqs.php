@@ -5,7 +5,7 @@
         <div class="respuesta">
             <p class="p_respuesta">Para reservar debés crear primero tu usuario. Luego podrás ir a la sección de reservas
             donde eligirás día, horario y cancha. Una vez efectuada tu reserva, tendrás a disposición 
-            el ID de la misma, el cual deberás enviarnos vía WhatsApp, donde te pediremos un comprobante
+            el ID de la misma, el cual deberás enviarnos vía WhatsApp junto con un comprobante
             de transferencia por el monto de seña que corresponda.
             </p>
         </div>
@@ -22,10 +22,9 @@
         <div class="pregunta">¿Puedo perder mis beneficios?<img class="btn_faqs" src="./imgs/boton_faqs.png" alt="boton desplazable"></div>
         <div class="respuesta">
             <p class="p_respuesta">
-                En caso de que no te presentes a jugar o que canceles fuera del límite de horario, se te aplicará
-                una 'falta'. Podés acumular como máximo 3 faltas por año, y una vez que las superes volverás a comenzar
-                de cero en tu racha de reservas, por lo que perderás tus beneficios hasta que logres nuevamente
-                acumular la cantidad de reservas necesarias para subir de nivel.
+            En caso de que no te presentes a jugar o que canceles fuera del límite de horario, se te aplicará
+                una 'falta'. Podés acumular como máximo 3 faltas por año, y una vez que las superes deberás comenzar de cero, 
+                por lo que perderás tus beneficios hasta subir nuevamente de nivel.
             </p>
         </div>
         

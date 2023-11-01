@@ -172,9 +172,9 @@
             <div id="body_contacto">
                 <form action="#">
                     <label for="nombre">Nombre y Apellido</label>
-                    <input class="input_contacto" type="text" name="nombre" id="nombre" autocomplete="off">
+                    <input class="input_contacto" type="text" name="nombre" id="nombre" autocomplete="off" required>
                     <label for="email">Email</label>
-                    <input class="input_contacto" type="email" name="apellido" id="apellido" autocomplete="off">
+                    <input class="input_contacto" type="email" name="apellido" id="apellido" autocomplete="off" required>
                     <label for="consulta">Mensaje</label>
                     <textarea name="" id="" cols="30" rows="10"></textarea>
                     <input type="submit" id="enviar_contacto">

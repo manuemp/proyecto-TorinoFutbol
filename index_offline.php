@@ -180,7 +180,7 @@
                                 <td>✅</td><td>Reservás con el 10%</td>
                             </tr>
                             <tr>
-                                <td>✅</td><td>10% de descuento en cualquier compra del buffet</td>
+                                <td>✅</td><td>25% de descuento en cualquier compra del buffet</td>
                             </tr>
                         </table>
                     </div>

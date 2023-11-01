@@ -4,7 +4,7 @@
         header("Location: index.php");
     }
 
-    include("./generar_cancha.php");
+    include_once("./generar_cancha.php");
 
     date_default_timezone_set("America/Argentina/Buenos_Aires");
     $hoy = date('Y-m-d');

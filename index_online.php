@@ -62,17 +62,17 @@
         {
             color: white;
             font-weight: normal;
-            font-size: 2.7rem;
+            font-size: 2rem;
         }
 
-        #reservas
+        /* #reservas
         {
             height: 100%;
             padding: 30px;
             box-sizing: border-box;
-        }
+        } */
 
-        #container_reservas
+        /* #container_reservas_responsive
         {
             height: 200px;
             width: 100%;
@@ -82,7 +82,7 @@
             box-sizing: border-box;
             background-color: white;
             overflow: scroll;
-        }
+        } */
 
         .reserva, .reserva_perdida
         {
@@ -93,7 +93,7 @@
             font-weight: bold;
             margin-bottom: 8px;
             cursor: default;
-            transition: 1s;
+            /* transition: 1s; */
         }
 
         .reserva{
@@ -130,7 +130,7 @@
             justify-content: center;
             font-weight: bold;
             font-size: 2rem;
-            margin-top: 25px;
+            /* margin-top: 25px; */
             margin-bottom: -14px;
             transition: 1s;
             cursor: pointer;
@@ -147,7 +147,7 @@
         }
 
         .icono_info{
-            height: 40px;
+            height: 32px;
         }
 
         .btn_triangulo{
@@ -158,10 +158,118 @@
             transition: 0.2s;
         }
 
+        #panel_usuario{
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px;
+            box-sizing: border-box;
+            background-image: url("./imgs/fondo_contacto5.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #usuario{
+            width: 380px;
+            height: 250px;
+            padding: 40px;
+            font-size: 2.8rem;
+            /* font-weight: bold; */
+            background-color: white;
+            border-radius: 10px;
+            font-weight: 400;
+            /* color: #333; */
+            /* box-shadow: 1px 1px 6px 0px lightgray; */
+        }
+
+
+        #reservas{
+            width: 58%;
+            height: 250px;
+            padding: 40px;
+            margin-left: 20px;
+            font-size: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            /* box-shadow: 1px 1px 6px 0px lightgray; */
+        }
+
+        #reservas_responsive{
+            display: none;
+            padding: 20px 30px 0px 30px;
+            margin-top: 10px;
+        }
+
+        #container_reservas{
+            width: 100%;
+            margin-top: 20px;
+            /* padding: 15px;
+            background-color: lavender; */
+            box-sizing: border-box;
+        }
+
+        #container_reservas_responsive{
+            padding: 20px 10px;
+            box-sizing: border-box;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        #titulo_usuario{
+            margin: 0;
+            margin-bottom: -24px;
+            font-size: 3rem;
+            color: #8650fe;
+        }
+        
+        @media(max-width: 1060px){
+            #reservas{
+                width: 55%;
+                height: 200px;
+                padding: 15px 20px;
+                font-size: 2.5rem;
+            }
+
+            .reserva{
+                padding: 10px;
+                font-size: 1.4rem;
+            }
+
+            #panel_usuario{
+                height: 280px;
+            }
+
+            #titulo_usuario{
+                font-size: 2.5rem;
+            }
+
+            #usuario{
+                padding: 15px 25px;
+                width: 30%;
+                font-size: 2rem;
+                height: 200px;
+            }
+        }
+
         @media(max-width: 920px)
         {
             #texto_niveles{
                 font-size: 2rem;
+            }
+        }
+
+        @media(max-width: 800px){
+            #reservas{
+                display: none;
+            }
+
+            #reservas_responsive{
+                display: block;
+            }
+
+            #usuario{
+                width: 60%;
             }
         }
 
@@ -185,9 +293,17 @@
                 font-size: 1.2rem;
             }
 
-            #container_reservas{
-                height: auto;
+            #panel_usuario{
+                justify-content: center;
             }
+
+            #usuario{
+                width: 85%;
+            }
+
+            /* #container_reservas{
+                height: auto;
+            } */
 
             .texto_info{
                 font-size: 2.7rem;
@@ -239,30 +355,48 @@
                 font-size: 1rem;
             }
         }
+        
     </style>
 </head>
 <body>
     <main>
         
-        <div class="info_container" id="info_usuario">
-            <h1 class="titulo_info" style="color:#e1ff00; margin-bottom: 0; margin-top: 0"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
+        <!-- <div class="info_container" id="info_usuario">
+            <h1 class="titulo_info" style="color:yellow; margin-bottom: 0; margin-top: 0; text-shadow: 1px 1px 50px black"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
             <div class="texto_info" style="color: white; text-shadow: 2px 2px 50px black">
                                                       <img src="./imgs/bandera.webp" alt="Icono Falta" class="icono_info"> Jugador <?php echo $level ?> 
                                                       <br><img src="./imgs/calendario.png" alt="Icono Falta" class="icono_info"> Reservas: <?php echo $reservas ?>   
                                                       <br><img src="./imgs/check.png" alt="Icono Falta" class="icono_info"> Asistencias: <?php echo $_SESSION["Racha"] ?> 
                                                       <br><img src="./imgs/falta.png" alt="Icono Falta" class="icono_info"> Faltas: <?php echo $_SESSION["Faltas"]?></div>
-        </div>
+        </div> -->
 
-        <section id="reservas">
+        <section id="panel_usuario">
+            <article id="usuario">
+                <h1 id="titulo_usuario"><?php echo $_SESSION["Nombre"] . " " . $_SESSION["Apellido"] ?></h1>
+                    <br><img src="./imgs/level2.png" alt="Icono Falta" class="icono_info"> Nivel: <?php echo $level ?>
+                    <br><img src="./imgs/calendario.png" alt="Icono Falta" class="icono_info"> Reservas: <span style="color:#8650fe"><?php echo $reservas ?></span> 
+                    <br><img src="./imgs/check.png" alt="Icono Falta" class="icono_info"> Asistencias: <span style="color:#8650fe"><?php echo $_SESSION["Racha"] ?></span> 
+                    <br><img src="./imgs/falta.png" alt="Icono Falta" class="icono_info"> Faltas: <span style="color: red;"><?php echo $_SESSION["Faltas"]?></span>
+            </article>
+            <article id="reservas">
+                <span style="color: #8650fe; font-weight: bold;">Tus próximas reservas</span>
+                <div id="container_reservas">
+                    <?php include("./reservas_pendientes.php") ?>
+                </div>
+            </article>
+        </section>
+
+        <section id="reservas_responsive">
             <p id="titulo_reservas">Tus próximas reservas</p>
-            <div id="container_reservas">
+            <div id="container_reservas_responsive">
                 <?php include("./reservas_pendientes.php") ?>
             </div>
         </section>
 
-        <div id="beneficios" class="beneficios_inactivo">Ver Beneficios <img id="btn_beneficios" src="./imgs/btn_triangulo_1.png" class="btn_triangulo"></div>
+        <!-- <div id="beneficios" class="beneficios_inactivo">Ver Beneficios <img id="btn_beneficios" src="./imgs/btn_triangulo_1.png" class="btn_triangulo"></div> -->
 
-        <section class="info_container" id="beneficios_container" style="display: none;">
+        <!-- <section class="info_container" id="beneficios_container" style="display: none;"> -->
+        <section class="info_container" id="beneficios_container">    
             <div class="niveles_container">
                 <div class="item_nivel" id="recreativo">
                     <div class="item_titulo">Recreativo</div><br>
@@ -315,7 +449,7 @@
                                 <td>✅</td><td>Reservás con el 10%</td>
                             </tr>
                             <tr>
-                                <td>✅</td><td>10% de descuento en cualquier compra del buffet</td>
+                                <td>✅</td><td>25% de descuento en cualquier compra del buffet</td>
                             </tr>
                         </table>
                     </div>
