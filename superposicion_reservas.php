@@ -37,6 +37,6 @@
 </html>
 <script>
     document.getElementById("volver").addEventListener('click', ()=>{
-        location.href = "./index.php";
+        location.href = "./reservar.php";
     });
 </script>

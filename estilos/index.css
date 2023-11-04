@@ -5,8 +5,6 @@ body, html
     background: linear-gradient(45deg, lavender, white);
     margin: auto;
     padding: 0;
-    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
-    font-family: 'Helvetica Neue', sans-serif;
     font-size: 12px;
 }
 
@@ -17,53 +15,6 @@ body, html, .nav1, .nav2{
 a
 {
     text-decoration: none;
-}
-
-.logo
-{
-    width: 120px;
-    margin-left: 10px;
-    cursor:pointer;
-}
-
-.opcion
-{
-    cursor: pointer;
-    color: white;
-    /* Cambiar por rem? */
-    font-size: 20px;
-    font-weight: bold;
-    padding: 14px;
-    margin-right: 15px;
-    border-radius: 10px;
-}
-
-.opcion:hover
-{
-    background: linear-gradient(90deg, #5628bc, transparent 92%);
-}
-
-.info_container
-{
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-    padding: 45px 25px;
-    color: #8650fe;
-    transition: 2s;
-    cursor: default;
-}
-
-.info_titulo
-{
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-.info_texto
-{
-    font-size: 2.3rem;
-    color:#3e139c;
 }
 
 .niveles_container
@@ -82,7 +33,6 @@ a
     box-shadow: 3px 4px 12px 1px lightgray;
     padding: 20px;
     border-radius: 10px;
-    /* width: 330px; */
     width: 25%;
     margin-bottom: 20px;
 }
@@ -239,6 +189,21 @@ font-size: 2rem;
     .item_texto
     {
         font-size: 1.8rem;
+    }
+} */
+
+/* @media(min-width: 1390px){
+    .info_container{
+        padding: 45px 0px;
+    }
+
+    #beneficios_container{
+        justify-content: center;
+    }
+
+    .item_nivel{
+        width: 370px;
+        margin: 20px;
     }
 } */
 

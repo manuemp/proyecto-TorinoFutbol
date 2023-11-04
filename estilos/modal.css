@@ -21,7 +21,8 @@
     top: 50%;
     left: 50%;
     width: 400px;
-    height: 390px;
+    min-height: 390px;
+    height: auto;
     margin-top: -190px;
     margin-left: -200px;
     background-color: white;

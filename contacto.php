@@ -38,7 +38,6 @@
 
         #header_contacto{
             padding: 10px 20px;
-            /* background-color: #00053d; */
             background: linear-gradient(45deg, #570cff, #9363fb);
             border-bottom: 2px solid #3e139c;
         }
@@ -50,16 +49,18 @@
 
         .input_contacto{
             display: block;
-            border: none;
-            border-bottom: 2px solid #3e139c;
+            border: 2px solid rgb(238, 236, 236);
+            border-radius: 10px;
             height: 30px;
             margin: 10px 0px 20px 0px;
             width: 200px;
             transition: 0.5s;
+            padding-left: 15px;
+            font-weight: bold;
         }
 
         .input_contacto:focus{
-            border-bottom: 2px solid palegreen;
+            border: 2px solid #8650fe;
         }
 
         input:focus, textarea:focus{
@@ -67,7 +68,7 @@
         }
 
         textarea:focus{
-            border: 2px solid palegreen;
+            border: 2px solid #8650fe;
         }
 
         label{
@@ -95,11 +96,11 @@
             height: 120px;
             min-height: 120px;
             max-height: 350px;
-            border: 2px solid #3e139c;
+            border: 2px solid rgb(238, 236, 236);
             border-radius: 10px;
             padding: 20px;
             box-sizing: border-box;
-            font-size: 1.5rem;
+            /* font-size: 1.5rem; */
             font-family: inherit;
         }
 
@@ -117,6 +118,28 @@
             justify-content: center;
         }
 
+        #mail_enviado{
+            display: block;
+            padding: 20px;
+            background: #0aae0a;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            border-bottom: 3px solid palegreen;
+        }
+
+        #error_mail{
+            display: block;
+            padding: 20px;
+            background: red;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            border-bottom: 3px solid crimson;
+        }
+
         @media(max-width: 650px){
             #contacto{
                 width: 95%;
@@ -131,6 +154,35 @@
     </style>
 </head>
 <body>
+
+    <?php 
+    
+        $respuesta_mail = "";
+
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            $nombre = $_POST["nombre_contacto"];
+            $email = $_POST["email_contacto"];
+            $mensaje = $_POST["mensaje"];
+            $asunto = "TorinoFútbol: Consulta de " . $nombre;
+            $destino = "manuel.em.pedro@gmail.com";
+
+            $header = "From: " . $nombre . "<" . $email . ">";
+
+            $enviado = mail($destino, $asunto, $mensaje, $header);
+
+            if($enviado)
+            {
+                $respuesta_mail = "<span id='mail_enviado'>¡Mail enviado correctamente!</span>";
+            }
+            else
+            {
+                $respuesta_mail = "<span id='error_mail'>¡Hubo un problema al enviar el mail! Por favor, intenta nuevamente</span>";
+            }
+        }
+    
+    ?>
+
     <span id="modal_background"></span>
     <!-- <nav class="nav1"></nav> -->
     <?php 
@@ -139,6 +191,7 @@
         else
             include("./nav_offline.php");
     ?>
+    <?php echo $respuesta_mail  ?>
     <main>
         <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
         <!-- MODAL -->
@@ -170,13 +223,13 @@
                 <p style="color: white; font-weight: bold">¿Tenés alguna consulta? ¡No dudes en escribirnos!</p>
             </div>
             <div id="body_contacto">
-                <form action="#">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <label for="nombre">Nombre y Apellido</label>
-                    <input class="input_contacto" type="text" name="nombre" id="nombre" autocomplete="off" required>
+                    <input class="input_contacto" type="text" name="nombre_contacto" id="nombre_contacto" autocomplete="off" required>
                     <label for="email">Email</label>
-                    <input class="input_contacto" type="email" name="apellido" id="apellido" autocomplete="off" required>
+                    <input class="input_contacto" type="email" name="email_contacto" id="email_contacto" autocomplete="off" required>
                     <label for="consulta">Mensaje</label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
                     <input type="submit" id="enviar_contacto">
                 </form>
             </div>
@@ -196,6 +249,12 @@
     var modal = document.getElementById("modal_inicio_sesion");
     var cerrar_modal = document.querySelectorAll(".modal_cerrar");
     var modal_background = document.getElementById("modal_background");
+
+    //Codigo para evitar que me reenvíe el formulario y nunca desaparezca el mensaje de 
+    //'mail enviado correctamente'
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 
     iniciar_sesion.addEventListener('click', ()=>
     {

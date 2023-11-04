@@ -598,96 +598,69 @@
 
     function generar_tabla(data)
     {
-        data.forEach((elemento) =>{            
+        let fila;
+        let cont = 0;
+        data.forEach((registro) =>{  
             let tr_filtro = document.createElement("tr");
-            let tr_responsive = document.createElement("tr");
-            let span_filtro = document.createElement("span");
-
-            let td_nombre = document.createElement("td");
-            let td_apellido = document.createElement("td");
-            let td_email = document.createElement("td");
-            let td_dia = document.createElement("td");
-            let td_cancha = document.createElement("td");
-            let td_hora = document.createElement("td");
+            let tr_filtro_responsive = document.createElement("tr");
             let td_boton = document.createElement("td");
-
+            let td_boton_responsive = document.createElement("td");
             let boton = document.createElement("button");
             let boton_falta = document.createElement("button");
-            let tacho = document.createElement("img");
-            let tacho_responsive = document.createElement("img");
-
-            let td_boton_responsive = document.createElement("td");
             let boton_responsive = document.createElement("button");
             let boton_falta_responsive = document.createElement("button");
 
-            //Creo el tr con los datos de la reserva del usuario
             tr_filtro.className = "item_historial";
-            tr_responsive.className = "item_responsive";
-
-            td_nombre.innerHTML = elemento["nombre"];
-            td_nombre.className = `nombre td_historial`;
-            td_apellido.innerHTML = elemento["apellido"];
-            td_apellido.className = "apellido td_historial ";
-            td_email.innerHTML = elemento["email"];
-            td_email.className = "email td_historial ";
-            td_dia.innerHTML = elemento["dia"];
-            td_dia.className = "dia td_historial ";
-            td_cancha.innerHTML = elemento["cancha"];
-            td_cancha.className = "cancha td_historial ";
-            td_hora.innerHTML = elemento["hora"];
-            td_hora.className = "hora td_historial ";
+            tr_filtro_responsive.className = "item_responsive";
             td_boton.className = "boton";
-            tacho.setAttribute("src", "./imgs/eliminar.png");
-            tacho.className = "icono_eliminar";
-            boton_falta.innerHTML = "FALTA";
-            boton_falta.className = "btn_falta";
-
             boton.className = "btn_falta";
-            boton.appendChild(tacho);
+            boton.innerHTML = "<img src='./imgs/eliminar.png' class='icono_eliminar'>";
+            boton_falta.className = "btn_falta";
+            boton_falta.innerHTML = "FALTA";
+            boton_responsive.className = "btn_falta";
+            boton_responsive.innerHTML = "<img src='./imgs/eliminar.png' class='icono_eliminar'>";
+            boton_falta_responsive.innerHTML = "FALTA";
+            boton_falta_responsive.className = "btn_falta";
 
+            tr_filtro.innerHTML = `
+                <td class='nombre td_historial'>${registro["nombre"]}</td>
+                <td class='apellido td_historial'>${registro["apellido"]}</td>
+                <td class='email td_historial'>${registro["email"]}</td>
+                <td class='cancha td_historial'>${registro["cancha"]}</td>
+                <td class='dia td_historial'>${registro["dia"]}</td>
+                <td class='hora td_historial'>${registro["hora"]}</td>`;
+
+            td_boton.appendChild(boton_falta);
+            td_boton.appendChild(boton);
+
+            tr_filtro.appendChild(td_boton);
+
+            td_boton_responsive.appendChild(boton_responsive);
+            td_boton_responsive.appendChild(boton_falta_responsive);
+
+            tr_filtro_responsive.appendChild(td_boton_responsive);
 
             boton.addEventListener('click', ()=>{
-                baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
-                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                baja_reserva(registro["id"], registro["email"], registro["nombre"], 
+                             registro["apellido"], registro["hora"], registro["cancha"], registro["dia"]);
                 flag_btn = true;
             })
 
             boton_falta.addEventListener('click', ()=>{
-                aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
-                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                aplicar_falta(registro["id"], registro["email"], registro["nombre"], 
+                             registro["apellido"], registro["hora"], registro["cancha"], registro["dia"]);
                 flag_btn = true;
             })
 
-            tacho_responsive.setAttribute("src", "./imgs/eliminar.png");
-            tacho_responsive.className = "icono_eliminar";
-            boton_responsive.className = "btn_falta";
-            boton_responsive.appendChild(tacho_responsive);
-            boton_falta_responsive.innerHTML = "FALTA";
-            boton_falta_responsive.className = "btn_falta";
-
             boton_responsive.addEventListener('click', ()=>{
-                baja_reserva(elemento["id"], elemento["email"], elemento["nombre"], 
-                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                baja_reserva(registro["id"], registro["email"], registro["nombre"], 
+                             registro["apellido"], registro["hora"], registro["cancha"], registro["dia"]);
             })
 
             boton_falta_responsive.addEventListener('click', ()=>{
-                aplicar_falta(elemento["id"], elemento["email"], elemento["nombre"], 
-                             elemento["apellido"], elemento["hora"], elemento["cancha"], elemento["dia"]);
+                aplicar_falta(registro["id"], registro["email"], registro["nombre"], 
+                             registro["apellido"], registro["hora"], registro["cancha"], registro["dia"]);
             })
-
-            td_boton.appendChild(boton_falta);
-            td_boton.appendChild(boton);
-            tr_filtro.appendChild(td_nombre);
-            tr_filtro.appendChild(td_apellido);
-            tr_filtro.appendChild(td_email);
-            tr_filtro.appendChild(td_cancha);
-            tr_filtro.appendChild(td_dia);
-            tr_filtro.appendChild(td_hora);
-            tr_filtro.appendChild(td_boton);
-
-            td_boton_responsive.appendChild(boton_falta_responsive);
-            td_boton_responsive.appendChild(boton_responsive);
-            tr_responsive.appendChild(td_boton_responsive);
 
             //Lleno el modal cuando se haga click en el registro creado
             tr_filtro.addEventListener('click', ()=>{
@@ -695,19 +668,19 @@
                 {
                     modal_admin.style.display = "block";
                     modal_background.style.display = "block";
-                    document.getElementById("modal_hidden").value = elemento["id"];
-                    document.getElementById("modal_numero_reserva").innerHTML = `Reserva n° ${elemento["id"]}`;
-                    document.getElementById("modal_nombre").innerHTML = `${elemento["nombre"]} ${elemento["apellido"]}`;
-                    document.getElementById("modal_dia").innerHTML = elemento["dia"];
-                    document.getElementById("modal_cancha").innerHTML = `${elemento["cancha"]} -  ${elemento["hora"]}hs`;
-                    document.getElementById("modal_mail").innerHTML = elemento["email"];
-                    document.getElementById("debe").innerHTML = `Debe: ${formatter.format(parseInt(elemento["precio"]) - parseInt(elemento["adelanto"]))}`
-                    document.getElementById("modal_precio").innerHTML = `Total: <span style="color:crimson">${formatter.format(elemento["precio"])}</span>`;
-                    document.getElementById("input_senia").value = elemento["adelanto"];
+                    document.getElementById("modal_hidden").value = registro["id"];
+                    document.getElementById("modal_numero_reserva").innerHTML = `Reserva n° ${registro["id"]}`;
+                    document.getElementById("modal_nombre").innerHTML = `${registro["nombre"]} ${registro["apellido"]}`;
+                    document.getElementById("modal_dia").innerHTML = registro["dia"];
+                    document.getElementById("modal_cancha").innerHTML = `${registro["cancha"]} -  ${registro["hora"]}hs`;
+                    document.getElementById("modal_mail").innerHTML = registro["email"];
+                    document.getElementById("debe").innerHTML = `Debe: ${formatter.format(parseInt(registro["precio"]) - parseInt(registro["adelanto"]))}`
+                    document.getElementById("modal_precio").innerHTML = `Total: <span style="color:crimson">${formatter.format(registro["precio"])}</span>`;
+                    document.getElementById("input_senia").value = registro["adelanto"];
                 }
                 flag_btn = false;
             });
-
+            
             //Por ultimo, veo si la reserva es de hoy y todavía no se jugó,
             //si es de hoy y ya pasó el horario, o si no es de hoy.
             
@@ -722,9 +695,9 @@
             let hora = `${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
             let hoy = `${addZero(d.getDate())}/${addZero(d.getMonth() + 1)}/${addZero(d.getFullYear())}`
 
-            if(hoy == elemento["dia"])
+            if(hoy == registro["dia"])
             {
-                if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${elemento["hora"]}`))
+                if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${registro["hora"]}`))
                 {
                     tr_filtro.className = "item_historial hoy";
                     tr_responsive.className = "item_responsive hoy";
@@ -737,7 +710,7 @@
             }
 
             body_tabla.appendChild(tr_filtro);
-            body_tabla.appendChild(tr_responsive);
+            body_tabla.appendChild(tr_filtro_responsive);
         });
     }
 

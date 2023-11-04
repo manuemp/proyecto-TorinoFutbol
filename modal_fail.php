@@ -3,7 +3,7 @@
         <span class="modal_cerrar">X</span>
     </div>
     <div class="modal_main" style="margin: auto;">
-        <h1>¡Ingresá en Torino Fútbol!</h1><br>
+        <h1 class="modal_titulo">¡Ingresá en Torino Fútbol!</h1><br>
         <form action="./iniciar_sesion.php" method="post">
             <div class="form_opcion">
                 <label for="email">Correo Electrónico</label>

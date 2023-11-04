@@ -25,7 +25,7 @@
 
         #titulo_registro
         {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: bold;
         }
 
@@ -35,7 +35,8 @@
             height: 100%;
             width: 55%;
             color: white;
-            background: radial-gradient(#6b27fc, #270c63);
+            background: linear-gradient(#8e59ff, #5c13ff);
+            /* background: radial-gradient(#6b27fc, #270c63); */
             padding: 20px;
             box-sizing: border-box;
             font-size: 1.3rem;
@@ -83,10 +84,12 @@
         {
             width: 200px;
             height: 30px;
-            background-color: #00053d;
-            border: 2px solid white;
+            /* background-color: #00053d;
+            border: 2px solid white; */
+            background-color: white;
+            border: 2px solid lightgray;
             padding: 5px;
-            color: white;
+            color: black;
             font-weight: bold;
             display: block;
             border-radius: 10px;
@@ -94,11 +97,14 @@
 
         #enviar
         {
-            background-color: rgb(37, 92, 255);
+            /* background-color: rgb(37, 92, 255); */
+            background-color: dodgerblue;
             height: 45px;
             cursor: pointer;
             width: 214px;
             margin-top: 25px;
+            border: none;
+            color: white;
         }
 
         .logo
@@ -218,7 +224,6 @@
     }
     
     ?>
-
 
     <main>
         <div style="display: block;">

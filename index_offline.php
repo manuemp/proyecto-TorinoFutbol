@@ -192,7 +192,7 @@
 
         <div class="info_container">
             <div class="info_titulo" style="text-align: center;">Canchas que hacen la diferencia</div><br>
-            <div class="info_texto" style="text-align: center;">Césped sintético profesional<br>Sistemas de alto drenaje anti-inundación</div>
+            <div class="info_texto" style="text-align: center;">Césped sintético profesional<br>Sistemas de drenaje anti-inundación</div>
         </div>
         
         <div id="sintetico">

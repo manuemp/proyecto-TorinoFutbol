@@ -1,5 +1,11 @@
 <?php session_start(); ?>
 <?php 
+
+    if(!isset($_SESSION["Nombre"]))
+    {
+        header("Location:index.php");
+    }
+
     include("./conexion.php");
     $email = $_SESSION["Email"];
 
@@ -62,20 +68,30 @@
             background-size: cover;
         }
 
+        main{
+            background-image: url("./imgs/fondo_inicio3.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
         #reservas
         {
             margin: auto;
-            width: 100%;
+            /* width: 100%; */
+            width: 65%;
             height: 100%;
             background-color: white;
-            padding: 40px 40px 0px 40px;
+            padding: 30px 30px 0px 40px;
             box-sizing: border-box;
             overflow: scroll;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .titulo_reserva
         {
-            color: crimson;
+            color: #8650fe;
             font-size: 3.5rem;
             font-weight: bold;
             width: 100%;
@@ -85,12 +101,12 @@
 
         .select_reserva
         {
-            /* width: 50%; */
-            width: 45%;
+            /* width: 60%; */
+            width: 390px;
             display: block;
-            /* margin: 20px auto; */
             margin: 14px auto;
-            height: 60px;
+            /* height: 60px; */
+            height: 50px;
             font-size: 2rem;
             font-weight: bold;
             box-sizing: border-box;
@@ -105,7 +121,8 @@
         {
             display: flex;
             flex-wrap: wrap;
-            width: 45%;
+            /* width: 60%; */
+            width: 390px;
             justify-content: space-between;
             align-items: center;
             margin: auto;
@@ -115,21 +132,25 @@
         {
             box-shadow: 2px 2px 7px 1px lightblue;
             border: none;
-            width: 36%;
+            /* width: 36%; */
+            width: 100%;
             background-color: greenyellow;
             cursor: pointer;
             margin: 0;
         }
 
         #precio{
-            width: 260px;
-            text-align: right;
+            /* width: 260px; */
+            width: 100%;
+            /* text-align: right; */
+            text-align: center;
             font-weight: bold;
             font-size: 2.2rem;
             height: 60px;
             padding: 15px;
             box-sizing: border-box;
-            color: crimson;
+            color: #8650fe;
+            margin-top: 10px;
         }
 
         #beneficio{
@@ -149,7 +170,8 @@
         }
 
         form{
-            height: 100%;
+            height: auto;
+            padding: 10px
         }
 
         #arrow{
@@ -161,7 +183,7 @@
 
         @media(max-width: 1000px){
             #reservar{
-                width: 260px;
+                width: 390px;
             }
 
             .container_reserva{
@@ -176,6 +198,12 @@
             }
         }
 
+        @media(max-width: 1170px){
+            /* .container_reserva, .select_reserva{
+                width: 72%;
+            } */
+        }
+
         @media (max-width: 900px){
             .select_reserva{
                 height: 50px;
@@ -186,43 +214,65 @@
             }
         }
 
-        @media(max-width: 650px){
+        @media(max-width: 750px){
             main{
                 height: 75vh;
             }
 
-            .select_reserva{
-                width: 90%;
+            .titulo_reserva, #precio{
+                margin-top: 30px;
+                font-size: 2rem;
             }
 
-            #reservar{
-                width: 200px;
+            .select_reserva{
+                width: 100%;
+                margin-bottom: 10px;
+                height: 40px;
             }
 
             #arrow{
                 height: 30px;
             }
-        }
-
-        @media(max-width: 450px){
-            .select_reserva{
-                width: 100%;
-                font-size: 1.4rem;
-            }
 
             #reservar{
                 width: 100%;
             }
 
+            #reservas{
+                border-radius: 10px;
+                margin: auto;
+                position: relative;
+                top: 10%;
+                width: 70%;
+                height: 80%;
+            }
+
+            #beneficio{
+                margin: 0;
+            }
+
+            #precio{
+                margin-top: 0;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media(max-width: 450px){
+
+            #reservas{
+                width: 90%;
+            }
+
+            .select_reserva{
+                width: 100%;
+                font-size: 1.2rem;
+            }
+
             #beneficio{
                 width: 100px;
             }
-
-            .titulo_reserva{
-                margin-top: 30px;
-                font-size: 2.2rem;
-            }
         }
+    
 
     </style>
 </head>
@@ -230,8 +280,8 @@
     <?php include("./nav_online.php") ?>
     <main>
         <a href="./index.php"><img src="./imgs/left_arrow2.png" alt="Volver" id="arrow"></a>
-        <form action="./generar_reserva.php" method="post">
-            <section id="reservas">
+        <section id="reservas">
+        <form action="./generar_reserva.php" method="post" id="form_reserva">
                 <h1 class="titulo_reserva" style="margin: 0;">Hacé tu reserva</h1><br>
                 <select name="select_dia" class="select_reserva" id="select_dia">
                     <?php 

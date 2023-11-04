@@ -16,13 +16,11 @@
     <link rel="stylesheet" href="./estilos/index.css">
     <title>TorinoFútbol: Tu Historial de Reservas</title>
     <style>
-        main
-        {
+        main{
             height: 100vh;
         }
 
-        .historial
-        {
+        .historial{
             border-top: 20px solid white;
             position: relative;
             top: 40px;
@@ -38,15 +36,13 @@
             overflow: scroll;
         }
 
-        .item_historial, .item_historial_falta, .header_historial
-        {
+        .item_historial, .item_historial_falta, .header_historial{
             width: 100%;
             height: 60px;
             display: flex;
             justify-content: center;
             border-radius: 10px;
             margin-bottom: 15px;
-            transition: 1s;
         }
 
         .item_historial{
@@ -63,26 +59,22 @@
             background-color: red;
         }
 
-        .item_historial:hover
-        {
+        .item_historial:hover{
             background-color: #702eff;
             color: white;
         }
 
-        table
-        {
+        table{
             width: 100%;
             height: 100%;
         }
 
-        thead, th
-        {
+        thead, th{
             position: sticky;
             top: 0;
         }
 
-        .td_historial
-        {
+        .td_historial{
             width: 30%;
             margin-left: 10px;
             font-weight: bold;
@@ -92,24 +84,19 @@
             font-size: 2rem;
         }
 
-        #th_historial
-        {
+        #th_historial{
             background-color: #333;
             color: white;
             border-radius: 10px 10px 0 0;
         }
 
-        #filtros_historial
-        {
+        #filtros_historial{
             color: white;
             height: 70px;
-            /* border-radius: 0px 0px 20px 20px; */
-            /* background: linear-gradient(45deg, #4300d3,#702eff); */
             background: linear-gradient(45deg, #481f9e, #8650fe 80%);
         }
 
-        #container_filtro
-        {
+        #container_filtro{
             width: 100%;
             display: flex;
             justify-content: start;
@@ -118,16 +105,14 @@
             padding-right: 20px;
         }
 
-        input[type='checkbox']
-        {
+        input[type='checkbox']{
             height: 20px;
             width: 20px;
             margin-left: 4%;
             margin-right: 10px;
         }
 
-        select, button
-        {
+        select, button{
             width: 180px;
             height: 35px;
             border: none;
@@ -236,6 +221,7 @@
 
 <script>
 
+    const html = new DOMParser();
     let filtro = document.getElementById("filtro_cancha");
     let body_tabla = document.getElementById("body_tabla");
     let check = document.getElementById("check");
@@ -258,7 +244,6 @@
     {
         let formulario = new FormData(document.getElementById("container_filtro"));
         $("#body_tabla").empty();
-
         $.ajax({
             url: './filtrar_reservas.php',
             type: 'post',
@@ -274,14 +259,7 @@
                 generar_tabla(respuesta);
                 if(body_tabla.childNodes.length == 0)
                 {
-                    let tr_filtro = document.createElement("tr");
-                    let td_vacio = document.createElement("td");
-
-                    tr_filtro.className = "item_historial";
-                    td_vacio.innerHTML = "No hay reservas...";
-                    td_vacio.className = "td_historial";
-                    tr_filtro.appendChild(td_vacio);
-                    body_tabla.appendChild(tr_filtro);
+                    body_tabla.innerHTML = "<tr class='item_historial'><td class='td_historial'>No hay reservas...</td></tr>";
                 }
             }
         });
@@ -289,33 +267,30 @@
 
     function generar_tabla(data)
     {
-        data.forEach((elemento) =>{   
-            let tr_filtro = document.createElement("tr");
-            let td_dia = document.createElement("td");
-            let td_cancha = document.createElement("td");
-            let td_hora = document.createElement("td");
-
-            if(parseInt(elemento["Asistio"]) == 0){
-                tr_filtro.className = "item_historial_falta";
+        var fila = "";
+        data.forEach((registro) =>{   
+            if(parseInt(registro["Asistio"]) == 0){
+                fila += `
+                <tr class='item_historial_falta'>\
+                <td class='td_historial'>${registro["Dia"]}</td>\
+                <td class='td_historial'>${registro["Cancha"]}</td>\
+                <td class='td_historial'>${registro["Hora"]}</td>\
+                </tr>\
+                `
             }
             else
             {
-                tr_filtro.className = "item_historial";
+                fila += `
+                <tr class='item_historial'>\
+                <td class='td_historial'>${registro["Dia"]}</td>\
+                <td class='td_historial'>${registro["Cancha"]}</td>\
+                <td class='td_historial'>${registro["Hora"]}</td>\
+                </tr>\
+                `
             }
-
-            td_dia.innerHTML = elemento["Dia"];
-            td_dia.className = "td_historial";
-            td_cancha.innerHTML = elemento["Cancha"];
-            td_cancha.className = "td_historial";
-            td_hora.innerHTML = elemento["Hora"];
-            td_hora.className = "td_historial";
-
-            tr_filtro.appendChild(td_dia);
-            tr_filtro.appendChild(td_cancha);
-            tr_filtro.appendChild(td_hora);
-
-            body_tabla.appendChild(tr_filtro);
         });
+
+        body_tabla.innerHTML = fila;
     }
 
     function mostrar_ocultar_faltas()

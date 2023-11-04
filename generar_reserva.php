@@ -25,18 +25,20 @@
     {
         header("Location:superposicion_reservas.php");
     }
-
-    if($resultado_reservas == 0)
+    else
     {
-        $consulta_reservas = mysqli_query($conexion, "INSERT INTO Reservas (Dia, Hora, Cancha, Nombre, Apellido, Email, Asistio, Precio, Adelanto) 
-                                            VALUES ('$dia', '$hora', '$cancha', '$nombre', '$apellido', '$email', 1, '$precio', 0)");
-        $consulta_id = mysqli_query($conexion, "SELECT MAX(ID) AS ID FROM Reservas");
-        $id = mysqli_fetch_assoc($consulta_id)["ID"];
-    
-        $consulta_reservas = mysqli_query($conexion, "UPDATE Usuarios SET Racha = Racha + 1 WHERE Email = '$email'");
-        header("Location:reserva_confirmada.php?cancha=$cancha&dia=$dia&hora=$hora&id_reserva=$id&precio=$precio");
+        if($resultado_reservas == 0)
+        {
+            $consulta_reservas = mysqli_query($conexion, "INSERT INTO Reservas (Dia, Hora, Cancha, Nombre, Apellido, Email, Asistio, Precio, Adelanto) 
+                                                VALUES ('$dia', '$hora', '$cancha', '$nombre', '$apellido', '$email', 1, '$precio', 0)");
+            $consulta_id = mysqli_query($conexion, "SELECT MAX(ID) AS ID FROM Reservas");
+            $id = mysqli_fetch_assoc($consulta_id)["ID"];
+        
+            $consulta_reservas = mysqli_query($conexion, "UPDATE Usuarios SET Racha = Racha + 1 WHERE Email = '$email'");
+            header("Location:reserva_confirmada.php?cancha=$cancha&dia=$dia&hora=$hora&id_reserva=$id&precio=$precio");
+        }
+        //Llevar a una página de error en la reserva que después de 3 segundos redireccione al index
     }
-    //Llevar a una página de error en la reserva que después de 3 segundos redireccione al index
 
 
 ?>
