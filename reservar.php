@@ -341,7 +341,6 @@
     select_dia.addEventListener('change', filtrar_horarios);
 
     select_cancha.addEventListener('change', ()=>{
-        console.log(select_cancha.value)
         if(select_cancha.value == "") 
         {
             select_hora.setAttribute("disabled", "");

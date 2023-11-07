@@ -241,7 +241,7 @@
             }
         }
         
-        @media(max-width: 1060px){
+        @media(max-width: 1250px){
             .item_nivel{
                 height: 300px;
             }
@@ -250,7 +250,7 @@
                 width: 55%;
                 height: 200px;
                 padding: 15px 20px;
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .reserva{
@@ -263,31 +263,26 @@
             }
 
             #titulo_usuario{
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             #usuario{
                 padding: 15px 25px;
-                width: 30%;
+                width: 35%;
                 font-size: 2rem;
                 height: 200px;
             }
         }
 
-        @media(max-width: 920px)
+        @media(max-width: 950px)
         {
-            #texto_niveles{
-                font-size: 2rem;
-            }
-        }
-
-        @media(max-width: 800px){
             #reservas{
                 display: none;
             }
 
             #reservas_responsive{
                 display: block;
+                text-align: center;
             }
 
             #usuario{
@@ -337,12 +332,12 @@
 
             #titulo_reservas{
                 font-size: 2.4rem;
-                text-align: center;
+                /* text-align: center; */
             }
 
             .reserva, .reserva_perdida{
                 font-size: 1.2rem;
-                text-align: center;
+                /* text-align: center; */
             }
 
             .item_nivel{
@@ -351,6 +346,19 @@
         }
 
         @media(max-width: 425px){
+            #panel_usuario{
+                justify-content: center;
+                padding: 20px 0px;
+                height: auto;
+
+            }
+
+            #usuario{
+                width: 80%;
+                padding: 30px 20px;
+            }
+
+
             #info_faltas{
                 background-image: url("./imgs/roja.png");
             }

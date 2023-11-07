@@ -29,12 +29,13 @@
     <script src="./jquery.js"></script>
     <title>TorinoFútbol: Admin - Reservas</title>
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
         body, html{
             height: 100%;
-            /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
-            font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 5px;
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
         }
 
         .nav_admin{
@@ -103,20 +104,19 @@
         .item_historial{
             width: 100%;
             height: 60px;
-            background-color: whitesmoke;
+            background-color: lavender;
             color: #8650fe;
             display: flex;
             justify-content: start;
-            border-radius: 10px;
-            margin-bottom: 5px;
             cursor: pointer;
             padding-left: 10px;
             box-sizing: border-box;
+            margin-bottom: 5px;
 
         }
 
         .item_historial:hover{
-            background-color: lavender;
+            background-color: #cacaff;
         }
 
         table{
@@ -140,6 +140,7 @@
             color: white;
             border-radius: 10px 10px 0 0;
             cursor: default;
+            border: none;
         }
 
         #filtros_historial{
@@ -205,12 +206,11 @@
 
         .item_responsive{
             width: 100%;
-            background-color:whitesmoke;
+            background-color:lavender;
             position:relative;
             top: -10px;
             display: none;
-            border-bottom: 2px solid red;
-            border-radius: 0px 0px 10px 10px;
+            border-bottom: 2px solid lightgray;
         }
 
         .item_responsive td{
@@ -255,7 +255,6 @@
             height: 40px;
             padding: 10px;
             box-sizing: border-box;
-            /* background-color: lavender; */
             font-size: 1.3rem;
             margin-bottom: 10px;
             font-weight: bold;
@@ -310,22 +309,33 @@
         }
 
         .hoy{
-            background-color: #cdff9e;
+            background-color: moccasin;
+            color: navy;
         }
 
         .hoy:hover{
-            background-color: #7cff00;
-        }
-
-        .hoy_pasado{
-            background-color: #ffbc65;
-        }
-
-        .hoy_pasado:hover{
             background-color: #ff9b4f
         }
 
+        .hoy_pasado{
+            background-color: darkgray;
+            color: white;
+        }
 
+        .hoy_pasado:hover{
+            background-color: #727272
+        }
+
+        .mensaje{
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            position: relative;
+            top: -7px;
+            display: block;
+            margin-bottom: -4px;
+            font-size: 0.6rem;
+        }
 
         @media(max-width: 1070px){
             .btn_falta{
@@ -357,6 +367,9 @@
         }
 
         @media(max-width: 750px){
+            .opcion{
+                font-size: 15px;
+            }
 
             .boton{
                 display: none;
@@ -405,6 +418,10 @@
                 border-right:none;
             }
 
+            .mensaje{
+                top: -14px;
+            }
+
         }
 
         @media(max-width: 500px){
@@ -445,7 +462,7 @@
             }
 
             h1{
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             #modal_admin{
@@ -482,7 +499,7 @@
         <div class="botones_admin"><button id="modal_adm_salir">Salir</button><button id="modal_adm_guardar">Guardar</button></div>
     </section>
 
-    <article id="filtros_historial" class="item_historial">
+    <!-- <article id="filtros_historial" class="item_historial">
         <form id="container_filtro" method="post" enctype="multipart/form-data">
             <select name="filtro_cancha" id="filtro_cancha">
                 <option value="" selected>Todas las Canchas</option>
@@ -504,10 +521,35 @@
             </select>
             <input type="text" placeholder="Filtrar por email" id="filtro_email">
         </form>
-    </article>
+    </article> -->
 
     <table id="tabla">
         <thead>
+            <tr>
+                <th id="filtros_historial" class="item_historial" style="margin-top: -3px; margin-bottom: 2px;">
+                    <form id="container_filtro" method="post" enctype="multipart/form-data">
+                        <select name="filtro_cancha" id="filtro_cancha">
+                            <option value="" selected>Todas las Canchas</option>
+                            <option value="1">F5 (A)</option>
+                            <option value="2">F5 (B)</option>
+                            <option value="3">F7 (A)</option>
+                            <option value="4">F7 (B)</option>
+                            <option value="5">F8 (A)</option>
+                            <option value="6">F8 (B)</option>
+                        </select>
+                        <select name="filtro_dia" id="filtro_dia">
+                            <option value="" selected>Cualquier Día</option>
+                            <?php 
+                                for($i = $dia_inicio ; $i < $dia_limite ; $i++)
+                                {
+                                    echo "<option value='" .  date('Y-m-d', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "'>" . date('d/m/y', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input type="text" placeholder="Filtrar por email" id="filtro_email">
+                    </form>
+                </th>
+            </tr>
             <tr id="th_historial" class="item_historial">
                 <th class="nombre td_historial">Nombre</th>
                 <th class="apellido td_historial">Apellido</th>
@@ -518,7 +560,31 @@
                 <th class="boton td_historial"></th>
             </tr>
         </thead>
+
         <tbody id="body_tabla">
+            <tr class="item_historial">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr>
+            <tr>
+                <td class="mensaje">Adeuda</td>
+            </tr>
+
+            <tr class="item_historial">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr>
+            <tr>
+                <td class="mensaje" style="background: seagreen">Pagó</td>
+            </tr>
         </tbody>
     </table>
 
@@ -609,6 +675,7 @@
             let boton_falta = document.createElement("button");
             let boton_responsive = document.createElement("button");
             let boton_falta_responsive = document.createElement("button");
+            
 
             tr_filtro.className = "item_historial";
             tr_filtro_responsive.className = "item_responsive";
@@ -700,17 +767,38 @@
                 if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${registro["hora"]}`))
                 {
                     tr_filtro.className = "item_historial hoy";
-                    tr_responsive.className = "item_responsive hoy";
+                    tr_filtro_responsive.className = "item_responsive hoy";
                 }
                 else
                 {
                     tr_filtro.className = "item_historial hoy_pasado";
-                    tr_responsive.className = "item_responsive hoy_pasado";
+                    tr_filtro_responsive.className = "item_responsive hoy_pasado";
                 }
+            }
+
+            if(registro["adelanto"] == registro["precio"]){
+                tr_filtro.style.borderLeft = "12px solid #3aea00";
+            }
+            else if(registro["adelanto"] != "0"){
+                tr_filtro.style.borderLeft = "12px solid orange";
+            }
+            else{
+                // tr_mensaje.innerHTML = "<td class='mensaje' style='background-color: red;'>Adeuda</td>";
+                tr_filtro.style.borderLeft = "12px solid red";
             }
 
             body_tabla.appendChild(tr_filtro);
             body_tabla.appendChild(tr_filtro_responsive);
+            
+            //ver si las reservas que no se hicieron hoy (o sea, que se hicieron hace más de un día)
+            //siguen sin seña. En ese caso le aviso al administrador para que notifique al usuario
+            //y vea si dar de baja la reserva o no.
+            if(registro["dia_pedido"] != hoy && registro["adelanto"] == "0")
+            {
+                let tr_mensaje = document.createElement("tr");
+                tr_mensaje.innerHTML = "<td class='mensaje' style='background-color: red;'>Adeuda</td>";
+                body_tabla.appendChild(tr_mensaje);
+            }
         });
     }
 
