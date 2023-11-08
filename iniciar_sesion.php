@@ -26,6 +26,9 @@
         $_SESSION['Racha'] = $data['Racha'];
         $_SESSION['Administrador'] = $data['Administrador'];
 
+        mysqli_free_result($consulta);
+        mysqli_close($conexion);
+
         if(intval($_SESSION['Administrador']) == 1)
         {
             header("Location:admin_reservas.php");

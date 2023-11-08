@@ -9,6 +9,7 @@
         body
         {
             background: linear-gradient(45deg, #4c02e9, #9f78f6);
+            min-height: 100vh;
         }
 
         p

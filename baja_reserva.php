@@ -13,4 +13,6 @@
     $consulta = mysqli_query($conexion, "DELETE FROM Reservas WHERE ID = $id");
     $consulta = mysqli_query($conexion, "UPDATE Usuarios SET Racha = Racha - 1 WHERE Email = '$email'");
 
+    mysqli_free_result($consulta);
+    mysqli_close($conexion);
 ?>

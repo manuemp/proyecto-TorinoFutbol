@@ -15,6 +15,9 @@
         $fila = $consulta->fetch_assoc();
         $_SESSION["Faltas"] = $fila["Faltas"];
         $_SESSION["Racha"] = $fila["Racha"];
+
+        mysqli_free_result($consulta);
+        mysqli_close($conexion);
     }
     catch(Exception $e)
     {

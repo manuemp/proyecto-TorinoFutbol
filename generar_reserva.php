@@ -24,6 +24,9 @@
 
     if($resultado_usuario > 0)
     {
+        mysqli_free_result($consulta_reservas);
+        mysqli_free_result($consulta_usuario);
+        mysqli_close($conexion);
         header("Location:superposicion_reservas.php");
     }
     else
@@ -39,6 +42,10 @@
                 $id = mysqli_fetch_assoc($consulta_id)["ID"];
             
                 $consulta_reservas = mysqli_query($conexion, "UPDATE Usuarios SET Racha = Racha + 1 WHERE Email = '$email'");
+
+                mysqli_free_result($consulta_usuario);
+                mysqli_close($conexion);
+
                 header("Location:reserva_confirmada.php?cancha=$cancha&dia=$dia&hora=$hora&id_reserva=$id&precio=$precio");
             }
         }

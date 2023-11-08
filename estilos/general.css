@@ -1,13 +1,3 @@
-
-/* body, html, .nav1, .nav2
-{
-    max-width: 1700px;
-} */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,100;1,9..40,200;1,9..40,300;1,9..40,400;1,9..40,500;1,9..40,600;1,9..40,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 /* Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -23,7 +13,8 @@
 body, html
 {
     background: linear-gradient(45deg, lavender, white);
-    min-height: 100vh;
+    min-height: 100%;
+    height: auto;
     margin: 0;
     padding: 0;
     display: block;
@@ -60,7 +51,6 @@ body, html, .nav1, .nav2{
 {
     cursor: pointer;
     color: white;
-    /* Cambiar por rem? */
     font-size: 20px;
     font-weight: bold;
     padding: 14px;
@@ -83,11 +73,9 @@ body, html, .nav1, .nav2{
 .info_container
 {
     width: 100%;
-    /* height: 300px; */
     height: auto;
     box-sizing: border-box;
     padding: 45px 45px;
-    /* margin-top: 20px; */
     color: #8650fe;
     transition: 2s;
     cursor: default;
@@ -122,6 +110,50 @@ body, html, .nav1, .nav2{
     width: 150px;
     filter: opacity(0.5)
 }
+
+#nav1_responsive
+{
+    display:none;
+}
+
+#boton_desplegable
+{
+    width: 50px;
+}
+
+.navbar_desplegable
+{
+    display: none;
+    width: 100%;
+    position: absolute;
+    background-color: #00053d;
+    opacity: 0.9;
+    z-index: 3;
+}
+
+.opcion_desplegable
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    color: white;
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.opcion_desplegable:hover
+{
+    background-color: dodgerblue;
+}
+
+
+/* ///////// */
 
 label
 {

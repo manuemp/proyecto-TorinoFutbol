@@ -26,460 +26,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/modal.css">
+    <link rel="stylesheet" href="estilos/admin.css">
     <script src="./jquery.js"></script>
     <title>TorinoFútbol: Admin - Reservas</title>
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-        body, html{
-            height: 100%;
-            margin: 0;
-            padding: 5px;
-            font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    @media(max-width: 1070px){
+        .btn_falta{
+            width: 50px;
+            height: 50%;
         }
+    }
 
-        .nav_admin{
-            height: 55px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 2px solid #8650fe;
-        }
-
-        main{
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-wrap: wrap;
-            height: 60vh;
-        }
-
-        .logo{
-            width: 120px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        .opcion{
-            cursor: pointer;
-            color: #8650fe;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 14px;
-            margin-right: 15px;
-            border-radius: 10px;
-        }
-
-        a{
-            text-decoration: none;
-        }
-
-        #admin_links{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 500px;
-        }
-
-        .admin_btn{
-            background-color: white;
-            width: 130px;
-            border-radius: 0;
-            border: 2px solid #8650fe;
-            cursor: pointer;
-            text-align: center;
-            transition: 1s;
-        }
-
-        .admin_btn:hover{
-            background-color: #d0bbff;
+    @media(max-width: 950px){
+        .td_historial{
+            font-size: 0.8rem;
         }
 
         h1{
-            color:#8650fe;
-            font-size: 2.3rem;
-        }
-
-        .item_historial{
-            width: 100%;
-            height: 60px;
-            background-color: lavender;
-            color: #8650fe;
-            display: flex;
-            justify-content: start;
-            cursor: pointer;
-            padding-left: 10px;
-            box-sizing: border-box;
-            margin-bottom: 5px;
-
-        }
-
-        .item_historial:hover{
-            background-color: #cacaff;
-        }
-
-        table{
-            width: 100%;
-        }
-
-        thead, th{
-            top: 0;
-        }
-
-        .td_historial{
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content:left;
-            font-size: 1rem;
-        }
-
-        #th_historial{
-            background-color: #333;
-            color: white;
-            border-radius: 10px 10px 0 0;
-            cursor: default;
-            border: none;
-        }
-
-        #filtros_historial{
-            margin-top: 8px;
-            color: white;
-            height: 60px;
-            background: linear-gradient(45deg, #481f9e, #8650fe 80%);
-            cursor:default;
-        }
-
-        #container_filtro{
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        select, input{
-            width: 180px;
-            height: 35px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: inherit;
             text-align: center;
-            font-weight: bold;
-            margin-right: 15px;
         }
 
-        .nombre, .apellido{
-            width: 12%;
-        }
-
-        .email{
-            width: 20%
-        }
-
-        .cancha, .dia, .hora{
-            width: 15%;
-            justify-content: center;
+        .hora{
+            width: 14%;
         }
 
         .boton{
-            width: 15%;
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
+            width: 16%;
         }
 
-        .btn_falta{
-            height: 70%;
-            width: 70px;
-            background-color: red;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            font-family: inherit;
-            cursor: pointer;
+        #container_filtro{
+            justify-content: center;
+        }
+    }
+
+    @media(max-width: 750px){
+        .opcion{
+            font-size: 15px;
+        }
+
+        .boton{
+            display: none;
         }
 
         .item_responsive{
-            width: 100%;
-            background-color:lavender;
-            position:relative;
-            top: -10px;
+            display: block;
+        }
+
+        .email{
+            width: 40%;
+        }
+        
+        .nombre, .apellido{
             display: none;
-            border-bottom: 2px solid lightgray;
+        }
+
+        .cancha, .dia, .hora{
+            width: 20%;
         }
 
         .item_responsive td{
-            height: 48px;
-            display: flex;
-            width: 155px;
-            justify-content: space-around;
-            align-items: center;
+            width: 125px;
         }
 
-        #tr_btn_usuario_1{
-            text-align: right;
+        #filtros_historial{
+            height: 40px;
+            border-radius: 0px;
+        }
+
+        select, input{
+            width: 120px;
+            font-size: 0.65rem;
+            border: 2px solid #7643e5;
+            border-radius: 0px;
+            box-sizing: border-box;
         }
 
         .icono_eliminar{
-            height: 20px;
-            filter: invert(1);
-        }
-
-
-        /* Modal Admin */
-
-        #modal_admin{
-            display: none;
-            z-index: 3;
-            width: 500px;
-            height: 460px;
-            background-color: white;
-            border-radius: 20px;
-            border: 2px solid black;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            margin-left: -250px;
-            margin-top: -230px;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-
-        .campo_admin{
-            width: 100%;
-            height: 40px;
-            padding: 10px;
-            box-sizing: border-box;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color:#481f9e;
-        }
-
-        .botones_admin{
-            position: absolute;
-            bottom: 35px;
-            right: 10px;
-            width: 100%;
-            text-align: right;
-        }
-
-        #modal_adm_salir, #modal_adm_guardar{
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 70px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-family: inherit;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        #modal_adm_salir{
-            background-color: crimson;
-        }
-
-        #modal_adm_guardar{
-            background-color:#7643e5;
-        }
-
-        #modal_adm_salir:hover{
-            background-color: red;
-        }
-
-        #modal_adm_guardar:hover{
-            background-color:#8650fe;
+            height: 15px;
         }
 
         #input_senia{
-            font-size: 1.3rem;
-            border-bottom: 2px solid lightgray;
-            border-radius: 0;
-            width: 115px;
-            color: inherit;
-            text-align: left;
-            height: 25px;
-            padding-left: 8px;
-        }
-
-        .hoy{
-            background-color: moccasin;
-            color: navy;
-        }
-
-        .hoy:hover{
-            background-color: #ff9b4f
-        }
-
-        .hoy_pasado{
-            background-color: darkgray;
-            color: white;
-        }
-
-        .hoy_pasado:hover{
-            background-color: #727272
+            border-left: none;
+            border-top: none;
+            border-right:none;
         }
 
         .mensaje{
-            font-weight: bold;
-            text-align: center;
-            color: white;
-            position: relative;
-            top: -7px;
-            display: block;
-            margin-bottom: -4px;
+            top: -14px;
+        }
+
+    }
+
+    @media(max-width: 500px){
+        .cancha{
+            display: none;
+        }
+
+        .email{
+            width: 55%;
+        }
+
+        select, input{
+            width: 115px;
+        }
+
+        .item_historial{
+            height: 40px;
+        }
+
+        .td_historial{
+            font-size: 0.55rem;
+        }
+
+        #filtro_dia{
+            display: none;
+        }
+
+        .btn_falta{
             font-size: 0.6rem;
         }
 
-        @media(max-width: 1070px){
-            .btn_falta{
-                width: 50px;
-                height: 50%;
-            }
+        .icono_eliminar{
+            height: 12px;
         }
 
-        @media(max-width: 950px){
-            .td_historial{
-                font-size: 0.8rem;
-            }
-
-            h1{
-                text-align: center;
-            }
-
-            .hora{
-                width: 14%;
-            }
-
-            .boton{
-                width: 16%;
-            }
-
-            #container_filtro{
-                justify-content: center;
-            }
+        .item_responsive td{
+            height: 40px;
         }
 
-        @media(max-width: 750px){
-            .opcion{
-                font-size: 15px;
-            }
-
-            .boton{
-                display: none;
-            }
-
-            .item_responsive{
-                display: block;
-            }
-
-            .email{
-                width: 40%;
-            }
-            
-            .nombre, .apellido{
-                display: none;
-            }
-
-            .cancha, .dia, .hora{
-                width: 20%;
-            }
-
-            .item_responsive td{
-                width: 125px;
-            }
-
-            #filtros_historial{
-                height: 40px;
-                border-radius: 0px;
-            }
-
-            select, input{
-                width: 120px;
-                font-size: 0.65rem;
-                border: 2px solid #7643e5;
-                border-radius: 0px;
-                box-sizing: border-box;
-            }
-
-            .icono_eliminar{
-                height: 15px;
-            }
-
-            #input_senia{
-                border-left: none;
-                border-top: none;
-                border-right:none;
-            }
-
-            .mensaje{
-                top: -14px;
-            }
-
+        h1{
+            font-size: 1.6rem;
         }
 
-        @media(max-width: 500px){
-            .cancha{
-                display: none;
-            }
-
-            .email{
-                width: 55%;
-            }
-
-            select, input{
-                width: 115px;
-            }
-
-            .item_historial{
-                height: 40px;
-            }
-
-            .td_historial{
-                font-size: 0.55rem;
-            }
-
-            #filtro_dia{
-                display: none;
-            }
-
-            .btn_falta{
-                font-size: 0.6rem;
-            }
-
-            .icono_eliminar{
-                height: 12px;
-            }
-
-            .item_responsive td{
-                height: 40px;
-            }
-
-            h1{
-                font-size: 1.6rem;
-            }
-
-            #modal_admin{
-                width: 100%;
-                margin-left: 0px;
-                left: 0;
-                padding: 20px 10px;
-            }
-
-            .campo_admin, #input_senia{
-                font-size: 1rem;
-            }
-
-            #input_senia{
-                width: 65px;
-            }
+        #modal_admin{
+            width: 100%;
+            margin-left: 0px;
+            left: 0;
+            padding: 20px 10px;
         }
+
+        .campo_admin, #input_senia{
+            font-size: 0.9rem;
+        }
+
+        #input_senia{
+            width: 65px;
+        }
+    }
     </style>
 </head>
 <div id="modal_background"></div>
@@ -498,30 +192,6 @@
         <div class="campo_admin" id="modal_precio">Total: <span style="color: crimson">$22.000,00</span></div>
         <div class="botones_admin"><button id="modal_adm_salir">Salir</button><button id="modal_adm_guardar">Guardar</button></div>
     </section>
-
-    <!-- <article id="filtros_historial" class="item_historial">
-        <form id="container_filtro" method="post" enctype="multipart/form-data">
-            <select name="filtro_cancha" id="filtro_cancha">
-                <option value="" selected>Todas las Canchas</option>
-                <option value="1">F5 (A)</option>
-                <option value="2">F5 (B)</option>
-                <option value="3">F7 (A)</option>
-                <option value="4">F7 (B)</option>
-                <option value="5">F8 (A)</option>
-                <option value="6">F8 (B)</option>
-            </select>
-            <select name="filtro_dia" id="filtro_dia">
-                <option value="" selected>Cualquier Día</option>
-                <?php 
-                    for($i = $dia_inicio ; $i < $dia_limite ; $i++)
-                    {
-                        echo "<option value='" .  date('Y-m-d', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "'>" . date('d/m/y', strtotime(date('Y-m-d') . ' +' . $i . ' day')) . "</option>";
-                    }
-                ?>
-            </select>
-            <input type="text" placeholder="Filtrar por email" id="filtro_email">
-        </form>
-    </article> -->
 
     <table id="tabla">
         <thead>
@@ -787,18 +457,24 @@
                 tr_filtro.style.borderLeft = "12px solid red";
             }
 
+            if(registro["dia_pedido"] != hoy && registro["dia"] != hoy && registro["adelanto"] == "0")
+            {
+                tr_filtro.className = "item_historial adeuda";
+                tr_filtro_responsive.className = "item_responsive adeuda";
+            }
+
             body_tabla.appendChild(tr_filtro);
             body_tabla.appendChild(tr_filtro_responsive);
             
             //ver si las reservas que no se hicieron hoy (o sea, que se hicieron hace más de un día)
             //siguen sin seña. En ese caso le aviso al administrador para que notifique al usuario
             //y vea si dar de baja la reserva o no.
-            if(registro["dia_pedido"] != hoy && registro["adelanto"] == "0")
-            {
-                let tr_mensaje = document.createElement("tr");
-                tr_mensaje.innerHTML = "<td class='mensaje' style='background-color: red;'>Adeuda</td>";
-                body_tabla.appendChild(tr_mensaje);
-            }
+            // if(registro["dia_pedido"] != hoy && registro["dia"] != hoy && registro["adelanto"] == "0")
+            // {
+            //     let tr_mensaje = document.createElement("tr");
+            //     tr_mensaje.innerHTML = "<td class='mensaje' style='background-color: red;'>Adeuda</td>";
+            //     body_tabla.appendChild(tr_mensaje);
+            // }
         });
     }
 

@@ -28,7 +28,7 @@
                 //Evitar que la reserva de un mismo día aparezca cuando ya pasó la hora
                 if(strtotime($fila["Hora"]) > strtotime(date("H:i")))
                     if(intval($fila["Asistio"]) == 1){
-                        echo "<div class='reserva'>[id: " .  $fila["ID"] ."] - " . generarCancha($fila["Cancha"]) . " - " . date("d/m/y", strtotime($fila["Dia"])) . " - " . $fila["Hora"] . "hs</div>";
+                        echo "<div class='reserva' style='background:palegreen; color:green;'>[id: " .  $fila["ID"] ."] - " . generarCancha($fila["Cancha"]) . " - " . date("d/m/y", strtotime($fila["Dia"])) . " - " . $fila["Hora"] . "hs</div>";
                     }
                     else{
                         echo "<div class='reserva_perdida'>[id: " .  $fila["ID"] ."] - " . generarCancha($fila["Cancha"]) . " - " . date("d/m/y", strtotime($fila["Dia"])) . " - " . $fila["Hora"] . "hs</div>";
@@ -45,6 +45,9 @@
             }
         }
     }
+
+    mysqli_free_result($consulta);
+    mysqli_close($conexion);
 
 
 ?>

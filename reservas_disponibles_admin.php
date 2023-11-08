@@ -29,6 +29,8 @@
         $obj->dia_pedido = date("d/m/Y", strtotime($fila['Dia_Pedido']));
         array_push($arr, $obj);
     }
+
+    mysqli_close($conexion);
     
     echo json_encode($arr);
 ?>

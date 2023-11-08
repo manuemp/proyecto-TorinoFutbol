@@ -84,20 +84,6 @@
 
     <?php include("./nav_online.php") ?>
 
-    <!-- <div id="container_reserva">
-        <h3 id="titulo_reserva">¡Reserva exitosa!</h3>
-        <br>
-        <div class="info_reserva"><span style="color:darkviolet">Cancha:</span> <?php echo generarCancha($_GET["cancha"]); ?></div>
-        <div class="info_reserva"><span style="color:darkviolet">Dia:</span> <?php echo $dia ?></div>
-        <div class="info_reserva"><span style="color:darkviolet">Hora:</span> <?php echo $_GET["hora"] ?></div>
-        <div class="info_reserva"><span style="color:darkviolet">Tu ID de reserva es:</span> <?php echo $_GET["id_reserva"] ?></div>
-        <div class="info_reserva" id="precio"><span style="color:darkviolet"></span></div>
-        <br>
-        <div id="contactate">Contactate con el administrador para efectuar la seña:</div><br>
-        <div class="info_reserva"><span style="color:darkviolet">Tel:</span> 11-11111111</div><br>
-        <button class="boton_aceptar" id="volver">Volver al inicio</button>
-    </div> -->
-
     <div id="container_reserva">
         <h3 id="titulo_reserva">¡Reserva exitosa!</h3>
         <br>
@@ -117,7 +103,7 @@
 </html>
 
 <script>
-    // window.onbeforeunload = history.pushState(null, null, "index.php");
+    window.onbeforeunload = history.pushState(null, null, "index.php");
     
     document.getElementById("volver").addEventListener("click", ()=>{
         location.href = "./index.php";

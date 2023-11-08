@@ -19,6 +19,9 @@
         $obj->adelanto = $fila['Adelanto'];
         array_push($arr, $obj);
     }
+
+    mysqli_free_result($resultado);
+    mysqli_close($conexion);
     
     echo json_encode($arr);
 ?>

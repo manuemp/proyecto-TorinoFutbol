@@ -39,6 +39,9 @@
     else
         $respuesta->beneficio = "";
 
+    mysqli_free_result($consulta);
+    mysqli_close($conexion);
+
     echo json_encode($respuesta);
     
 

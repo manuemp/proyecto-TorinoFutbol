@@ -18,4 +18,6 @@
     $_SESSION['Racha'] = $data['Racha'];
     $_SESSION['Administrador'] = $data['Administrador'];
 
+    mysqli_free_result($consulta);
+    mysqli_close($conexion);
 ?>

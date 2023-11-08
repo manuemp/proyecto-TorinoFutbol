@@ -12,4 +12,7 @@
    {
       $consulta = mysqli_query($conexion, "UPDATE Usuarios SET Faltas = 0, Racha = 0 WHERE Email = '$email'");
    }
+
+   mysqli_free_result($consulta);
+   mysqli_close($conexion);
 ?>

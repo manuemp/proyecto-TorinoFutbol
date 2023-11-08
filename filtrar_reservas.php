@@ -28,6 +28,9 @@
 
     $array = json_encode($arr);
 
+    mysqli_free_result($resultado);
+    mysqli_close($conexion);
+
     echo $array;
 
 ?>
