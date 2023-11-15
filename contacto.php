@@ -21,6 +21,10 @@
             color: white;
         }
 
+        a{
+            color: greenyellow;
+        }
+
         main{
             background-image: url("./imgs/fondo_inicio2.jpeg");
             background-repeat: no-repeat;
@@ -109,13 +113,13 @@
             font-weight: bold;
             background: linear-gradient(45deg, dodgerblue, #0081ff);
             height: 80px;
-            padding: 20px;
+            padding: 18px;
             font-size: 1.5rem;
             box-sizing: border-box;
             text-align: center;
-            display: flex;
+            /* display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; */
         }
 
         #mail_enviado{
@@ -235,7 +239,7 @@
             </div>
         </article>
         <article id="whatsapp_contacto">
-            ¡Recordá que también podés comunicarte con nosotros vía Whatsapp al 11-11111111!
+            ¡Recordá que también podés comunicarte con nosotros vía Whatsapp al <a href="https://wa.me/1159807762/?text=Hola!%20Quiero%20hacer%20una%20consulta%20sobre%20TorinoFutbol" target="_blank">1159807762</a>!
         </article>
     </main>
 <!-- <footer class="footer"></footer> -->

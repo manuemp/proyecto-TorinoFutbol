@@ -1,6 +1,11 @@
 <?php session_start(); ?>
 <?php 
 
+    if(!(isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["mensaje"])))
+    {
+        header("Location:index.php");
+    }
+    
     include("./conexion.php");
 
     $nombre = $_POST["nombre"];

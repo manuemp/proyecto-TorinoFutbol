@@ -26,6 +26,7 @@
         array_push($arr, $subarray);
     }
 
+    //Codifico el array en JSON para poder enviarlo al server
     $array = json_encode($arr);
 
     mysqli_free_result($resultado);

@@ -8,16 +8,37 @@
     <link rel="stylesheet" href="./estilos/modal.css">
     <title>Torino Fútbol: Reservá las mejores canchas</title>
     <style>
-        @media(max-width: 920px)
-        {
+
+        @media(max-height: 500px){
+            #modal_inicio_sesion, #modal_inicio_sesion_fail{
+                padding: 5px 20px;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 100vh;
+                overflow: scroll;
+                font-size: 1.2rem;
+                margin: 0;
+                left: 0;
+                color: #6b27fc;
+                box-sizing: border-box;
+                position: fixed;
+                background-color: white;
+                border-radius: 0;
+                border: none;
+                min-height: 0;
+                z-index: 3;
+            }
+        }
+
+        @media(max-width: 920px){
             #texto_niveles
             {
                 font-size: 2rem;
             }
         }
 
-        @media(max-width: 650px)
-        {
+        @media(max-width: 650px){
             #nav1_responsive{
                 display: flex;
             }
@@ -67,6 +88,10 @@
 
             .info_texto{
                 font-size: 1.5rem;
+            }
+
+            .info_container{
+                padding: 45px 12px;
             }
         }
 

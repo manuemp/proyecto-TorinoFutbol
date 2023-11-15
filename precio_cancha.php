@@ -1,6 +1,11 @@
 <?php session_start(); ?>
 <?php
 
+    if(!isset($_POST["id_cancha"]))
+    {
+        header("Location:index.php");
+    }
+    
     $cancha = intval($_POST["id_cancha"]);
     $email = $_SESSION["Email"];
     $beneficio;

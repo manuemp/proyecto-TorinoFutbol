@@ -1,4 +1,9 @@
 <?php 
+    //Prohibo acceso si no se envió el form
+    if(!(isset($_POST["filtro_cancha"]) && isset($_POST["filtro_dia"]) && isset($_POST["filtro_email"])  )){
+        header("Location:index.php");
+    }
+
     include("./conexion.php");
 
     include("./generar_cancha.php");

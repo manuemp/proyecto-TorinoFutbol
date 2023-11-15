@@ -55,6 +55,10 @@
             right: 0;
         }
 
+        .niveles_container{
+            justify-content: space-between;
+        }
+
         .titulo_info
         {
             font-weight: bold;
@@ -122,7 +126,6 @@
             justify-content: center;
             font-weight: bold;
             font-size: 2rem;
-            /* margin-top: 25px; */
             margin-bottom: -14px;
             transition: 1s;
             cursor: pointer;
@@ -176,7 +179,6 @@
             font-weight: 400;
         }
 
-
         #reservas{
             width: 58%;
             max-width: 750px;
@@ -219,9 +221,9 @@
                 padding: 45px 0px;
             }
 
-            /* .niveles_container{
+            .niveles_container{
                 justify-content: center;
-            } */
+            }
 
             .item_nivel{
                 width: 370px;
@@ -274,7 +276,7 @@
             }
         }
 
-        @media(max-width: 950px)
+        @media(max-width: 970px)
         {
             #reservas{
                 display: none;
@@ -288,6 +290,8 @@
             #usuario{
                 width: 60%;
             }
+
+
         }
 
         @media(max-width: 650px)
@@ -342,6 +346,10 @@
 
             .item_nivel{
                 height: 280px;
+            }
+
+            .info_container{
+                padding: 45px 12px;
             }
         }
 

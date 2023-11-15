@@ -5,7 +5,6 @@ if(!isset($_SESSION["Nombre"]))
         header("Location:index.php");
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,7 @@ if(!isset($_SESSION["Nombre"]))
     <style>
         body
         {
-            background: linear-gradient(45deg, #6d2df6, #8650fe);
+            background: linear-gradient(45deg, #4c02e9, #9f78f6);
             min-height: 100vh;
         }
 
@@ -43,9 +42,8 @@ if(!isset($_SESSION["Nombre"]))
 <body>
     <?php include("./nav_online.php") ?>
     <br><br><br><br><br>
-    <p style="font-size: 5rem">Cuidado...</p>
-    <p>¡Ya tenés otra reserva en el mismo día y hora!</p>
-    <p>¡Intentá con otro horario!</p>
+    <p style="font-size: 5rem">Uups...</p>
+    <p>La reserva ya no está disponible</p>
     <button class="boton_aceptar" id="volver">Volver</button>
 </body>
 </html>

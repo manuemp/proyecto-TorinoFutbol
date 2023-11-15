@@ -1,4 +1,10 @@
 <?php
+
+    if(!(isset($_POST["email"]) && isset($_POST["pass"])))
+    {
+        header("Location:index.php");
+    }
+    
     $email = $_POST['email'];
     $pass = sha1($_POST['pass']);
 

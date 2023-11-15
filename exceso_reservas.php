@@ -1,3 +1,10 @@
+<?php session_start(); ?>
+<?php
+if(!isset($_SESSION["Nombre"]))
+    {
+        header("Location:index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +17,10 @@
         {
             background: linear-gradient(45deg, #4c02e9, #9f78f6);
             min-height: 100vh;
+        }
+
+        a{
+            text-decoration: none;
         }
 
         p
@@ -29,6 +40,7 @@
     </style>
 </head>
 <body>
+    <?php include("./nav_online.php") ?>
     <br><br><br><br><br>
     <p style="font-size: 5rem">Uups...</p>
     <p>¡Parece que tenés <u>demasiadas reservas!</u></p>

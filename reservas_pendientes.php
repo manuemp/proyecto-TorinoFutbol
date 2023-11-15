@@ -4,11 +4,14 @@
         header("Location: index.php");
     }
 
+    //Como este script se va a usar más de una vez en el index, porque cuando se hace
+    //responsive llamo por segunda vez para mostrar en otro formato los datos
+    //uso include_once para evitar errores.
     include_once("./generar_cancha.php");
 
+    //Seteo la zona horaria a la de Argentina
     date_default_timezone_set("America/Argentina/Buenos_Aires");
     $hoy = date('Y-m-d');
-
 
     include("./conexion.php");
     $email = $_SESSION["Email"];

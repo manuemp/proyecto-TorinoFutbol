@@ -75,19 +75,60 @@ h1{
 .item_historial{
     width: 100%;
     height: 60px;
-    background-color: lavender;
-    color: #8650fe;
+    /* background-color: lavender; */
+    /* color: #8650fe; */
+    background-color: white;
+    color: navy;
     display: flex;
     justify-content: start;
     cursor: pointer;
     padding-left: 10px;
     box-sizing: border-box;
-    margin-bottom: 5px;
-
+    border-bottom: 2px solid lightgray;
 }
 
 .item_historial:hover{
+    background-color: whitesmoke;
+    /* background-color: #cacaff; */
+}
+
+.hoy{
+    /* color: navy; */
+    /* background-color: white; */
+    border-bottom: 2px solid lightgray;
+    background-color: lavender;
+    color: #8650fe;
+}
+
+.hoy:hover{
+    /* background-color: whitesmoke; */
     background-color: #cacaff;
+}
+
+.hoy_pasado, .hoy_pasado:hover{
+    background-color: lightgray;
+    color: gray;
+}
+
+.mensaje{
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    position: relative;
+    top: -7px;
+    display: block;
+    margin-bottom: -4px;
+    font-size: 0.6rem;
+}
+
+.adeuda{
+    background-color: crimson;
+    color: white;
+    border-bottom: 2px solid red;
+}
+
+.adeuda:hover{
+    background-color: rgb(170, 0, 34);
 }
 
 table{
@@ -120,6 +161,7 @@ thead, th{
     height: 60px;
     background: linear-gradient(45deg, #481f9e, #8650fe 80%);
     cursor:default;
+    border-radius: 8px;
 }
 
 #container_filtro{
@@ -127,8 +169,8 @@ thead, th{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
 }
 
 select, input{
@@ -177,7 +219,7 @@ select, input{
 
 .item_responsive{
     width: 100%;
-    background-color:lavender;
+    background-color:white;
     position:relative;
     top: -10px;
     display: none;
@@ -219,6 +261,7 @@ select, input{
     margin-top: -230px;
     padding: 40px;
     box-sizing: border-box;
+    overflow: scroll;
 }
 
 .campo_admin{
@@ -233,14 +276,16 @@ select, input{
 }
 
 .botones_admin{
-    position: absolute;
+    /* position: absolute;
     bottom: 35px;
-    right: 10px;
+    right: 10px; */
     width: 100%;
     text-align: right;
 }
 
-#modal_adm_salir, #modal_adm_guardar{
+
+/* #modal_adm_salir, #modal_adm_guardar{ */
+.boton_modal_admin{
     color: white;
     border: none;
     padding: 10px;
@@ -252,21 +297,23 @@ select, input{
     cursor: pointer;
 }
 
-#modal_adm_salir{
+.cerrar{
     background-color: crimson;
 }
 
-#modal_adm_guardar{
-    background-color:#7643e5;
-}
-
-#modal_adm_salir:hover{
+.cerrar:hover{
     background-color: red;
 }
 
-#modal_adm_guardar:hover{
+.guardar{
+    background-color:#7643e5;
+}
+
+.guardar:hover{
     background-color:#8650fe;
 }
+
+
 
 #input_senia{
     font-size: 1.3rem;
@@ -279,41 +326,3 @@ select, input{
     padding-left: 8px;
 }
 
-.hoy{
-    background-color: moccasin;
-    color: navy;
-}
-
-.hoy:hover{
-    background-color: #ff9b4f
-}
-
-.hoy_pasado{
-    background-color: lightgray;
-    color: gray;
-}
-
-.hoy_pasado:hover{
-    background-color: #727272;
-    color: white;
-}
-
-.mensaje{
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    position: relative;
-    top: -7px;
-    display: block;
-    margin-bottom: -4px;
-    font-size: 0.6rem;
-}
-
-.adeuda{
-    background-color: crimson;
-    color: white;
-}
-
-.adeuda:hover{
-    background-color: rgb(170, 0, 34);
-}

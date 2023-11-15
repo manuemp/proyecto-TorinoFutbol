@@ -94,7 +94,7 @@
         <div class="info_reserva" id="precio"><span style="color:darkviolet"></span></div>
         <br>
         <div id="contactate">Contactate para efectuar la seña:</div><br>
-        <div class="info_reserva"><span style="color:darkviolet">Tel:</span> 11-11111111</div><br>
+        <div class="info_reserva"><span style="color:darkviolet">Tel:</span> 1159807762</div><br>
         <button class="boton_aceptar" id="volver">Volver al inicio</button>
     </div>
 

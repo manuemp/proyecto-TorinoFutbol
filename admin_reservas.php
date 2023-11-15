@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 <?php
-
     if(intval($_SESSION["Administrador"]) != 1)
     {
         header("Location:index.php");
@@ -31,6 +30,96 @@
     <title>TorinoFútbol: Admin - Reservas</title>
     <style>
 
+    #ayuda{
+        background-color: #501cc3;
+        position: absolute;
+        right: 20px;
+        width: 50px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    #ayuda:hover{
+        background-color: #2a0974;
+    }
+
+    #modal_estados, #modal_falta, #modal_baja{
+        display: none;
+        position: fixed;
+        background-color: white;
+        margin-left: -300px;
+        left: 50%;
+        top: 20%;
+        width: 620px;
+        height: auto;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        z-index: 3;
+        overflow: scroll;
+        cursor: default;
+    }
+
+    #nav_modal_estados{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        color: #8650fe;
+        padding: 10px;
+        box-sizing: border-box;
+        border-bottom: 2px solid whitesmoke;
+    }
+
+    #modal_falta, #modal_baja{
+        /* display: block; */
+        width: 450px;
+        margin-left: -225px;
+    }
+
+    #img_estados{
+        width: inherit;
+    }
+
+    #img_estados_responsive{
+        display: none;
+        width: 400px;
+    }
+
+    .contenido_modal_falta{
+        padding: 20px;
+        display: block;
+    }
+
+    @media(max-height: 500px){
+        #modal_estados, #modal_admin, #modal_falta, #modal_baja{
+            height: 100vh;
+            width: 100%;
+            top: 0;
+            left: 0;
+            margin-left: 0;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 0;
+            margin-top: 0;
+        }
+
+        .campo_admin{
+            margin-bottom: 0;
+        }
+
+        #modal_falta, #modal_baja, .botones_admin{
+            text-align: center;
+        }
+
+    }
+
     @media(max-width: 1070px){
         .btn_falta{
             width: 50px;
@@ -56,7 +145,7 @@
         }
 
         #container_filtro{
-            justify-content: center;
+            justify-content: start;
         }
     }
 
@@ -91,15 +180,15 @@
 
         #filtros_historial{
             height: 40px;
-            border-radius: 0px;
         }
 
         select, input{
             width: 120px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             border: 2px solid #7643e5;
-            border-radius: 0px;
+            border-radius: 5px;
             box-sizing: border-box;
+            margin-right: 5px;
         }
 
         .icono_eliminar{
@@ -116,6 +205,26 @@
             top: -14px;
         }
 
+        #ayuda{
+            padding: 6px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @media(max-width: 650px){
+        #img_estados{
+            display: none;
+        }
+        #img_estados_responsive{
+            display: block;
+        }
+        #modal_estados{
+            width: 400px;
+            margin-left: -200px;
+            left: 50%;
+            top: 0;
+            height: 100vh;
+        }
     }
 
     @media(max-width: 500px){
@@ -159,11 +268,19 @@
             font-size: 1.6rem;
         }
 
-        #modal_admin{
+        #modal_admin, #modal_falta, #modal_baja{
             width: 100%;
             margin-left: 0px;
             left: 0;
             padding: 20px 10px;
+            height: 100vh;
+            top: 0;
+            margin-top: 0;
+            border: 0;
+        }
+
+        .botones_admin{
+            position: relative;
         }
 
         .campo_admin, #input_senia{
@@ -173,6 +290,29 @@
         #input_senia{
             width: 65px;
         }
+
+        #ayuda{
+            padding: 0px;
+            font-size: 0.6rem;
+            height: 33px;
+            width: 38px;
+        }
+
+        #modal_estados{
+            width: 100%;
+            margin-left: 0;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            border: none;
+            border-radius: 0;
+            box-sizing: border-box;
+        }
+
+        #img_estados_responsive{
+            margin: auto;
+            width: 300px;
+        }
     }
     </style>
 </head>
@@ -181,6 +321,7 @@
     <?php include("./nav_admin.php") ?>
     <h1>Administrar Reservas</h1>
 
+    <!-- MODAL RESERVA ESPECIFICA USUARIO -->
     <section id="modal_admin">
         <input type="hidden" id="modal_hidden">
         <div class="campo_admin" id="modal_numero_reserva" style="border-bottom: 2px solid red;">Reserva n° 117</div>
@@ -190,8 +331,49 @@
         <div class="campo_admin" id="modal_mail"></div>
         <div class="campo_admin" id="modal_senia">Seña: $<input type="text" id="input_senia"><span style="color:lightgray" id="debe">Debe: </span></div>
         <div class="campo_admin" id="modal_precio">Total: <span style="color: crimson">$22.000,00</span></div>
-        <div class="botones_admin"><button id="modal_adm_salir">Salir</button><button id="modal_adm_guardar">Guardar</button></div>
+        <div class="botones_admin"><button id="modal_adm_salir" class="boton_modal_admin cerrar">Salir</button><button id="modal_adm_guardar" class="boton_modal_admin guardar">Guardar</button></div>
     </section>
+
+    <!-- MODAL ESTADOS RESERVA -->
+    <section id="modal_estados">
+        <div id="nav_modal_estados">
+            <div style="font-weight: bold;">Estados de reserva</div>
+            <div class="modal_cerrar cerrar" id="modal_estado_salir">X</div>
+        </div>
+        <img src="./imgs/estado_reservas.png" alt="estados" id="img_estados">
+        <img src="./imgs/estado_reservas_responsive.png" alt="estados" id="img_estados_responsive">
+    </section>
+
+    <!-- MODAL FALTA -->
+    <section id="modal_falta" style="line-height: 2">
+        <div>
+            <div style="font-weight: bold; color: crimson">Aplicar Falta a usuario</div>
+        </div>
+        <div class="titulo_modal_falta" style="color: #8560fe;font-weight: bold;">¿Desea aplicar una falta al usuario?</div>
+        <div class="contenido_modal_falta">
+                <div><span id="nombre_falta"></span> <span id="apellido_falta"></div>
+                <div><span id="mail_falta"></span></div>
+                <div><span id="dia_falta"></span> <span id="hora_falta"></div>
+                <div><span id="cancha_falta"></span></div>
+        </div>
+        <div class="botones_admin"><button class="boton_modal_admin cerrar">Salir</button><button class="boton_modal_admin guardar" id="falta_reserva">Falta</button></div>
+    </section>
+
+    <!-- MODAL BORRAR RESERVA -->
+    <section id="modal_baja" style="line-height: 2">
+        <div>
+            <div style="font-weight: bold; color: crimson">Borrar reserva del usuario</div>
+        </div>
+        <div class="titulo_modal_falta" style="color: #8560fe;font-weight: bold;">¿Desea borrar la reserva?</div>
+        <div class="contenido_modal_falta">
+                <div><span id="nombre_baja"></span> <span id="apellido_falta"></div>
+                <div><span id="mail_baja"></span></div>
+                <div><span id="dia_baja"></span> <span id="hora_falta"></div>
+                <div><span id="cancha_baja"></span></div>
+        </div>
+        <div class="botones_admin"><button class="boton_modal_admin cerrar">Salir</button><button class="boton_modal_admin guardar" id="baja_reserva">Baja</button></div>
+    </section>
+
 
     <table id="tabla">
         <thead>
@@ -217,6 +399,7 @@
                             ?>
                         </select>
                         <input type="text" placeholder="Filtrar por email" id="filtro_email">
+                        <span id="ayuda">Ayuda</span>
                     </form>
                 </th>
             </tr>
@@ -232,19 +415,16 @@
         </thead>
 
         <tbody id="body_tabla">
-            <tr class="item_historial">
+            <!-- <tr class="item_historial">
                 <td class='nombre td_historial'>Manuel</td>
                 <td class='apellido td_historial'>Pedro</td>
                 <td class='email td_historial'>mp@gmail.com</td>
                 <td class='cancha td_historial'>Futbol 5 (A)</td>
                 <td class='dia td_historial'>11/9/2023</td>
                 <td class='hora td_historial'>10:00:00</td>
-            </tr>
-            <tr>
-                <td class="mensaje">Adeuda</td>
             </tr>
 
-            <tr class="item_historial">
+            <tr class="item_historial adeuda">
                 <td class='nombre td_historial'>Manuel</td>
                 <td class='apellido td_historial'>Pedro</td>
                 <td class='email td_historial'>mp@gmail.com</td>
@@ -252,9 +432,51 @@
                 <td class='dia td_historial'>11/9/2023</td>
                 <td class='hora td_historial'>10:00:00</td>
             </tr>
-            <tr>
-                <td class="mensaje" style="background: seagreen">Pagó</td>
+
+            <tr class="item_historial hoy">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
             </tr>
+
+            <tr class="item_historial hoy_pasado">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr>
+
+            <tr class="item_historial hoy" style="border-left: 10px solid red">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr>
+
+            <tr class="item_historial hoy" style="border-left: 10px solid orange">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr>
+
+            <tr class="item_historial hoy" style="border-left: 10px solid #3aea00">
+                <td class='nombre td_historial'>Manuel</td>
+                <td class='apellido td_historial'>Pedro</td>
+                <td class='email td_historial'>mp@gmail.com</td>
+                <td class='cancha td_historial'>Futbol 5 (A)</td>
+                <td class='dia td_historial'>11/9/2023</td>
+                <td class='hora td_historial'>10:00:00</td>
+            </tr> -->
         </tbody>
     </table>
 
@@ -265,6 +487,8 @@
     let filtro_cancha = document.getElementById("filtro_cancha");
     let filtro_dia = document.getElementById("filtro_dia");
     let filtro_email = document.getElementById("filtro_email");
+    let ayuda = document.getElementById("ayuda");
+    var modal_estados = document.getElementById("modal_estados");
     var modal_admin = document.getElementById("modal_admin");
     var modal_background = document.getElementById("modal_background");
     var flag_btn = false;
@@ -278,10 +502,30 @@
     //Traer datos automáticamente antes de cargar la página
     traer_datos();
 
-    document.getElementById("modal_adm_salir").addEventListener('click', ()=>{
-        modal_admin.style.display = "none";
-        modal_background.style.display = "none";
+    ayuda.addEventListener('click', ()=>{
+        modal_estados.style.display = "block";
+        modal_background.style.display = "block";
     })
+
+    document.querySelectorAll(".cerrar").forEach((cerrar)=>{
+        cerrar.addEventListener('click', ()=>{
+            modal_estados.style.display = "none";
+            modal_admin.style.display = "none";
+            document.getElementById("modal_baja").style.display = "none";
+            document.getElementById("modal_falta").style.display = "none";
+            modal_background.style.display = "none";
+        })
+    })
+
+    // document.getElementById("modal_estado_salir").addEventListener('click', ()=>{
+    //     modal_estados.style.display = "none";
+    //     modal_background.style.display = "none";
+    // })
+
+    // document.getElementById("modal_adm_salir").addEventListener('click', ()=>{
+    //     modal_admin.style.display = "none";
+    //     modal_background.style.display = "none";
+    // })
 
     document.getElementById("modal_adm_guardar").addEventListener('click', ()=>{
         modal_admin.style.display = "none";
@@ -437,11 +681,13 @@
                 if(Date.parse(`1/1/2023 ${hora}`) < Date.parse(`1/1/2023 ${registro["hora"]}`))
                 {
                     tr_filtro.className = "item_historial hoy";
+                    tr_filtro_responsive.style.backgroundColor = "lavender";
                     tr_filtro_responsive.className = "item_responsive hoy";
                 }
                 else
                 {
                     tr_filtro.className = "item_historial hoy_pasado";
+                    tr_filtro_responsive.style.backgroundColor = "lightgray";
                     tr_filtro_responsive.className = "item_responsive hoy_pasado";
                 }
             }
@@ -460,6 +706,7 @@
             if(registro["dia_pedido"] != hoy && registro["dia"] != hoy && registro["adelanto"] == "0")
             {
                 tr_filtro.className = "item_historial adeuda";
+                tr_filtro_responsive.style.backgroundColor = "crimson";
                 tr_filtro_responsive.className = "item_responsive adeuda";
             }
 
@@ -479,12 +726,20 @@
     }
 
     function baja_reserva(id, email_user, nombre, apellido, hora, cancha, dia){
-        let confirmar = confirm(`¿Desea dar de baja la reserva?\n
-                    Nombre: ${nombre} ${apellido}\n
-                    Email: ${email_user}\n
-                    Dia: ${dia}, ${hora}hs\n
-                    Cancha: ${cancha}`);
-        if(confirmar){
+        modal_background.style.display = "block";
+        document.getElementById("modal_baja").style.display = "block";
+        document.getElementById("nombre_baja").innerHTML = `${nombre} ${apellido}`;
+        document.getElementById("mail_baja").innerHTML = email_user;
+        document.getElementById("dia_baja").innerHTML = `${dia}, ${hora}`;
+        document.getElementById("cancha_baja").innerHTML = cancha;
+
+        // let confirmar = confirm(`¿Desea dar de baja la reserva?\n
+        //             Nombre: ${nombre} ${apellido}\n
+        //             Email: ${email_user}\n
+        //             Dia: ${dia}, ${hora}hs\n
+        //             Cancha: ${cancha}`);
+
+        document.getElementById("baja_reserva").addEventListener('click', ()=>{
             $.ajax({
                 url: './baja_reserva.php',
                 method: 'post',
@@ -493,20 +748,32 @@
                         email: email_user 
                     },
                 success: function(){
+                    document.getElementById("modal_baja").style.display = "none";
+                    modal_background.style.display = "none";
                     alert("La reserva fue dada de baja");
                     traer_datos();
                 }
             });
-        }
+        });
+
     }
 
     function aplicar_falta(id, email_user, nombre, apellido, hora, cancha, dia){
-        let confirmar = confirm(`¿Desea aplicar una falta al usuario?\n
-                    Nombre: ${nombre} ${apellido}\n
-                    Email: ${email_user}\n
-                    Dia: ${dia}, ${hora}hs\n
-                    Cancha: ${cancha}`);
-        if(confirmar){
+        modal_background.style.display = "block";
+        document.getElementById("modal_falta").style.display = "block";
+        document.getElementById("nombre_falta").innerHTML = `${nombre} ${apellido}`;
+        document.getElementById("mail_falta").innerHTML = email_user;
+        document.getElementById("dia_falta").innerHTML = `${dia}, ${hora}`;
+        document.getElementById("cancha_falta").innerHTML = cancha;
+
+        // let confirmar = confirm(`¿Desea aplicar una falta al usuario?\n
+        //             Nombre: ${nombre} ${apellido}\n
+        //             Email: ${email_user}\n
+        //             Dia: ${dia}, ${hora}hs\n
+        //             Cancha: ${cancha}`);
+        // if(confirmar){
+
+        document.getElementById("falta_reserva").addEventListener('click', ()=>{
             $.ajax({
                 url: './aplicar_falta.php',
                 method: 'post',
@@ -515,11 +782,13 @@
                         email: email_user 
                     },
                 success: function(){
+                    document.getElementById("modal_falta").style.display = "none";
+                    modal_background.style.display = "none";
                     alert(`Se aplicó la falta a ${nombre} ${apellido}`);
                     traer_datos();
                 }
             });
-        }
+        });
     }
 
 </script>

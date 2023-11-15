@@ -7,8 +7,8 @@
     </div>
 
     <div class="nav2" id="nav2_normal">
-        <a class="opcion" href="historial_reservas.php">Historial</a>
-        <a class="opcion" href="reservar.php">Reservá</a>
+        <a class="opcion" href="historial_reservas.php">Mi Historial</a>
+        <a class="opcion" href="reservar.php">Hacer Reserva</a>
         <a class="opcion" href="contacto.php">Contacto</a>
     </div>
 </nav>
@@ -19,8 +19,8 @@
 </div>
 
 <div class="navbar_desplegable">
-    <a class="opcion_desplegable" href="historial_reservas.php">Historial</a>
-    <a class="opcion_desplegable" href="reservar.php">Reservá</a>
+    <a class="opcion_desplegable" href="historial_reservas.php">Mi Historial</a>
+    <a class="opcion_desplegable" href="reservar.php">Hacer Reserva</a>
     <a class="opcion_desplegable" href="contacto.php">Contacto</a>
     <a class="opcion_desplegable" href="cerrar_sesion.php">Cerrar Sesión</a>
 </div>
